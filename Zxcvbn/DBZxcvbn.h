@@ -6,10 +6,9 @@
 //  Copyright (c) 2014 Dropbox. All rights reserved.
 //
 
-@class DBResult;
+#import <Foundation/Foundation.h>
 
-#import "DBMatcher.h"
-#import "DBScorer.h"
+@class DBResult;
 
 @interface DBZxcvbn : NSObject
 

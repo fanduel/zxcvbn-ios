@@ -8,6 +8,8 @@
 
 #import "DBZxcvbn.h"
 #import "DBResult.h"
+#import "DBMatcher.h"
+#import "DBScorer.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface DBZxcvbn ()

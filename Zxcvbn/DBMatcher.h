@@ -18,12 +18,3 @@
 - (NSArray *)omnimatch:(NSString *)password userInputs:(NSArray *)userInputs;
 
 @end
-
-@interface DBMatchResources : NSObject
-
-@property (nonatomic, strong) NSArray *dictionaryMatchers;
-@property (nonatomic, strong) NSDictionary *graphs;
-
-+ (DBMatchResources *)sharedDBMatcherResources;
-
-@end

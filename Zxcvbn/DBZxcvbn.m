@@ -41,7 +41,7 @@
 - (DBResult *)passwordStrength:(NSString *)password userInputs:(NSArray<NSString *> *)userInputs
 {
     CFTimeInterval start = CACurrentMediaTime();
-    NSArray *matches = [self.matcher omnimatch:password userInputs:userInputs];
+    NSArray<DBMatch *> *matches = [self.matcher omnimatch:password userInputs:userInputs];
     DBResult *result = [self.scorer minimumEntropyMatchSequence:password matches:matches];
     CFTimeInterval end = CACurrentMediaTime();
     result.calcTime = (end - start) * 1000.0;

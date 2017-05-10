@@ -38,7 +38,7 @@
     return [self passwordStrength:password userInputs:nil];
 }
 
-- (DBResult *)passwordStrength:(NSString *)password userInputs:(NSArray *)userInputs
+- (DBResult *)passwordStrength:(NSString *)password userInputs:(NSArray<NSString *> *)userInputs
 {
     CFTimeInterval start = CACurrentMediaTime();
     NSArray *matches = [self.matcher omnimatch:password userInputs:userInputs];

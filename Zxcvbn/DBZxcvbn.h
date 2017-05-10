@@ -13,6 +13,6 @@
 @interface DBZxcvbn : NSObject
 
 - (DBResult *)passwordStrength:(NSString *)password;
-- (DBResult *)passwordStrength:(NSString *)password userInputs:(NSArray *)userInputs;
+- (DBResult *)passwordStrength:(NSString *)password userInputs:(NSArray<NSString *> *)userInputs;
 
 @end

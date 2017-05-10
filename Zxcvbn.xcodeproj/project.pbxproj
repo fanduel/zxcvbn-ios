@@ -16,7 +16,7 @@
 		D80ECB6C1BDEAA420055EF0A /* Zxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB731BDEAA420055EF0A /* Zxcvbn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */; };
 		D80ECB781BDEAA420055EF0A /* ZxcvbnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB771BDEAA420055EF0A /* ZxcvbnTests.m */; };
-		D80ECB8B1BDEAA7D0055EF0A /* DBMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB821BDEAA7D0055EF0A /* DBMatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D80ECB8B1BDEAA7D0055EF0A /* DBMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB821BDEAA7D0055EF0A /* DBMatcher.h */; };
 		D80ECB8C1BDEAA7D0055EF0A /* DBMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB831BDEAA7D0055EF0A /* DBMatcher.m */; };
 		D80ECB8D1BDEAA7D0055EF0A /* DBMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB831BDEAA7D0055EF0A /* DBMatcher.m */; };
 		D80ECB8E1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB841BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h */; settings = {ATTRIBUTES = (Public, ); }; };

@@ -22,7 +22,7 @@
 		D80ECB8E1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB841BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB8F1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB851BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m */; };
 		D80ECB901BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB851BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m */; };
-		D80ECB911BDEAA7D0055EF0A /* DBScorer.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB861BDEAA7D0055EF0A /* DBScorer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D80ECB911BDEAA7D0055EF0A /* DBScorer.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB861BDEAA7D0055EF0A /* DBScorer.h */; };
 		D80ECB921BDEAA7D0055EF0A /* DBScorer.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB871BDEAA7D0055EF0A /* DBScorer.m */; };
 		D80ECB931BDEAA7D0055EF0A /* DBScorer.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB871BDEAA7D0055EF0A /* DBScorer.m */; };
 		D80ECB941BDEAA7D0055EF0A /* DBZxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB881BDEAA7D0055EF0A /* DBZxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };

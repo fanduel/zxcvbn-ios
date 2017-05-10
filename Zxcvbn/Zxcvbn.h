@@ -16,6 +16,5 @@ FOUNDATION_EXPORT const unsigned char ZxcvbnVersionString[];
 
 #import <Zxcvbn/DBResult.h>
 #import <Zxcvbn/DBMatch.h>
-#import <Zxcvbn/DBScorer.h>
 #import <Zxcvbn/DBZxcvbn.h>
 #import <Zxcvbn/DBPasswordStrengthMeterView.h>

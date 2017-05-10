@@ -12,9 +12,9 @@
 
 @interface DBMatcher ()
 
-@property (nonatomic, strong) NSArray *dictionaryMatchers;
-@property (nonatomic, strong) NSDictionary *graphs;
-@property (nonatomic, strong) NSMutableArray *matchers;
+@property (nonatomic, strong) NSArray<MatcherBlock> *dictionaryMatchers;
+@property (nonatomic, strong) NSDictionary<NSString *, NSDictionary<NSString *, NSArray<NSString *> *> *> *graphs;
+@property (nonatomic, strong) NSMutableArray<MatcherBlock> *matchers;
 
 @end
 

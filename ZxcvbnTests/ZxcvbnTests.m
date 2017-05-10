@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "DBZxcvbn.h"
+#import "Zxcvbn.h"
 
 @interface ZxcvbnTests : XCTestCase
 

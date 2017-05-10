@@ -7,6 +7,7 @@
 //
 
 #import "DBMatcher.h"
+#import "DBMatch.h"
 
 typedef NSArray* (^MatcherBlock)(NSString *password);
 
@@ -703,10 +704,5 @@ typedef NSArray* (^MatcherBlock)(NSString *password);
     
     return result;
 }
-
-@end
-
-
-@implementation DBMatch
 
 @end

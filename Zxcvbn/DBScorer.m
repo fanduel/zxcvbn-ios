@@ -10,6 +10,7 @@
 
 #import "DBMatcher.h"
 #import "DBResult.h"
+#import "DBMatch.h"
 
 @implementation DBScorer
 

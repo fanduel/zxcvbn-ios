@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B04FA27F1EC3336B00429DC3 /* adjacency_graphs.json in Resources */ = {isa = PBXBuildFile; fileRef = D80ECB9A1BDEAABE0055EF0A /* adjacency_graphs.json */; };
 		B04FA2801EC3336B00429DC3 /* frequency_lists.json in Resources */ = {isa = PBXBuildFile; fileRef = D80ECB9B1BDEAABE0055EF0A /* frequency_lists.json */; };
+		B04FA2831EC333D400429DC3 /* DBResult.h in Headers */ = {isa = PBXBuildFile; fileRef = B04FA2811EC333D400429DC3 /* DBResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B04FA2841EC333D400429DC3 /* DBResult.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2821EC333D400429DC3 /* DBResult.m */; };
 		D80ECB6C1BDEAA420055EF0A /* Zxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB731BDEAA420055EF0A /* Zxcvbn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */; };
 		D80ECB781BDEAA420055EF0A /* ZxcvbnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB771BDEAA420055EF0A /* ZxcvbnTests.m */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B04FA2811EC333D400429DC3 /* DBResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBResult.h; sourceTree = "<group>"; };
+		B04FA2821EC333D400429DC3 /* DBResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBResult.m; sourceTree = "<group>"; };
 		D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Zxcvbn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Zxcvbn.h; sourceTree = "<group>"; };
 		D80ECB6D1BDEAA420055EF0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 				D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */,
 				D80ECB821BDEAA7D0055EF0A /* DBMatcher.h */,
 				D80ECB831BDEAA7D0055EF0A /* DBMatcher.m */,
+				B04FA2811EC333D400429DC3 /* DBResult.h */,
+				B04FA2821EC333D400429DC3 /* DBResult.m */,
 				D80ECB861BDEAA7D0055EF0A /* DBScorer.h */,
 				D80ECB871BDEAA7D0055EF0A /* DBScorer.m */,
 				D80ECB881BDEAA7D0055EF0A /* DBZxcvbn.h */,
@@ -142,6 +148,7 @@
 				D80ECB911BDEAA7D0055EF0A /* DBScorer.h in Headers */,
 				D80ECB941BDEAA7D0055EF0A /* DBZxcvbn.h in Headers */,
 				D80ECB8E1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h in Headers */,
+				B04FA2831EC333D400429DC3 /* DBResult.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D80ECB921BDEAA7D0055EF0A /* DBScorer.m in Sources */,
+				B04FA2841EC333D400429DC3 /* DBResult.m in Sources */,
 				D80ECB8F1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m in Sources */,
 				D80ECB951BDEAA7D0055EF0A /* DBZxcvbn.m in Sources */,
 				D80ECB8C1BDEAA7D0055EF0A /* DBMatcher.m in Sources */,

@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Dropbox. All rights reserved.
 //
 
+@class DBResult;
+
 #import "DBMatcher.h"
 #import "DBScorer.h"
 

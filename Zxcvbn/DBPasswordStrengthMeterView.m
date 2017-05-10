@@ -9,6 +9,7 @@
 #import "DBPasswordStrengthMeterView.h"
 
 #import "DBZxcvbn.h"
+#import "DBResult.h"
 
 @interface DBPasswordStrengthMeterView ()
 

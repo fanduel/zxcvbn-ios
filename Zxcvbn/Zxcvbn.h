@@ -14,6 +14,7 @@ FOUNDATION_EXPORT double ZxcvbnVersionNumber;
 //! Project version string for Zxcvbn.
 FOUNDATION_EXPORT const unsigned char ZxcvbnVersionString[];
 
+#import <Zxcvbn/DBResult.h>
 #import <Zxcvbn/DBMatcher.h>
 #import <Zxcvbn/DBScorer.h>
 #import <Zxcvbn/DBZxcvbn.h>

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class DBMatch;
+
 @interface DBMatcher : NSObject
 
 @property (nonatomic, assign) NSUInteger keyboardAverageDegree;
@@ -15,6 +17,6 @@
 @property (nonatomic, assign) NSUInteger keyboardStartingPositions;
 @property (nonatomic, assign) NSUInteger keypadStartingPositions;
 
-- (NSArray *)omnimatch:(NSString *)password userInputs:(NSArray *)userInputs;
+- (NSArray<DBMatch *> *)omnimatch:(NSString *)password userInputs:(NSArray<NSString *> *)userInputs;
 
 @end

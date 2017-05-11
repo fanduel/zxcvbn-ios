@@ -47,17 +47,17 @@
 
 #pragma mark - omnimatch -- combine everything
 
-- (NSArray *)omnimatch:(NSString *)password userInputs:(NSArray *)userInputs
+- (NSArray<DBMatch *> *)omnimatch:(NSString *)password userInputs:(NSArray<NSString *> *)userInputs
 {
     if ([userInputs count]) {
-        NSMutableDictionary *rankedUserInputsDict = [[NSMutableDictionary alloc] initWithCapacity:[userInputs count]];
+        NSMutableDictionary<NSString *, NSNumber *> *rankedUserInputsDict = [[NSMutableDictionary alloc] initWithCapacity:[userInputs count]];
         for (int i = 0; i < [userInputs count]; i++) {
             [rankedUserInputsDict setObject:[NSNumber numberWithInt:i + 1] forKey:[userInputs[i] lowercaseString]];
         }
         [self.matchers addObject:[self buildDictMatcher:@"user_inputs" rankedDict:rankedUserInputsDict]];
     }
     
-    NSMutableArray *matches = [[NSMutableArray alloc] init];
+    NSMutableArray<DBMatch *> *matches = [[NSMutableArray alloc] init];
 
     for (MatcherBlock matcher in self.matchers) {
         [matches addObjectsFromArray:matcher(password)];

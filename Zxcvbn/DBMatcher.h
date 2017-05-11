@@ -12,11 +12,6 @@
 
 @interface DBMatcher : NSObject
 
-@property (nonatomic, assign) NSUInteger keyboardAverageDegree;
-@property (nonatomic, assign) NSUInteger keypadAverageDegree;
-@property (nonatomic, assign) NSUInteger keyboardStartingPositions;
-@property (nonatomic, assign) NSUInteger keypadStartingPositions;
-
 - (NSArray<DBMatch *> *)omnimatch:(NSString *)password userInputs:(NSArray<NSString *> *)userInputs;
 
 @end

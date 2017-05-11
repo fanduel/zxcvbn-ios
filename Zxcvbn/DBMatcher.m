@@ -26,13 +26,6 @@
     if (self != nil) {
         DBMatchResources *resource = [DBMatchResources sharedDBMatcherResources];
         self.graphs = resource.graphs;
-
-        self.keyboardAverageDegree = [self calcAverageDegree:[self.graphs objectForKey:@"qwerty"]];
-        self.keypadAverageDegree = [self calcAverageDegree:[self.graphs objectForKey:@"keypad"]]; // slightly different for keypad/mac keypad, but close enough
-
-        self.keyboardStartingPositions = [[self.graphs objectForKey:@"qwerty"] count];
-        self.keypadStartingPositions = [[self.graphs objectForKey:@"keypad"] count];
-
         self.matchers = [NSArray arrayWithArray:resource.dictionaryMatchers];
         MatcherBlock l33tMatcherBlock = [self l33tMatchFromDictionaryMatchers:resource.dictionaryMatchers];
         self.matchers = [self.matchers arrayByAddingObjectsFromArray:@[l33tMatcherBlock, [self digitsMatch],
@@ -110,24 +103,6 @@
     };
 
     return block;
-}
-
-- (float)calcAverageDegree:(NSDictionary *)graph
-{
-    // on qwerty, 'g' has degree 6, being adjacent to 'ftyhbv'. '\' has degree 1.
-    // this calculates the average over all keys.
-    float average = 0.0;
-    for (NSString *key in [graph allKeys]) {
-        NSMutableArray *neighbors = [[NSMutableArray alloc] init];
-        for (NSString *n in (NSArray *)[graph objectForKey:key]) {
-            if (n != (id)[NSNull null]) {
-                [neighbors addObject:n];
-            }
-        }
-        average += [neighbors count];
-    }
-    average /= [graph count];
-    return average;
 }
 
 #pragma mark - dictionary match with common l33t substitutions

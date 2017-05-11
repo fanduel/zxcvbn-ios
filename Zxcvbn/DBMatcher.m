@@ -12,7 +12,6 @@
 
 @interface DBMatcher ()
 
-@property (nonatomic, strong) NSArray<MatcherBlock> *dictionaryMatchers;
 @property (nonatomic, strong) NSDictionary<NSString *, NSDictionary<NSString *, NSArray<NSString *> *> *> *graphs;
 @property (nonatomic, strong) NSArray<MatcherBlock> *matchers;
 
@@ -26,7 +25,6 @@
 
     if (self != nil) {
         DBMatchResources *resource = [DBMatchResources sharedDBMatcherResources];
-        self.dictionaryMatchers = resource.dictionaryMatchers;
         self.graphs = resource.graphs;
 
         self.keyboardAverageDegree = [self calcAverageDegree:[self.graphs objectForKey:@"qwerty"]];
@@ -35,8 +33,9 @@
         self.keyboardStartingPositions = [[self.graphs objectForKey:@"qwerty"] count];
         self.keypadStartingPositions = [[self.graphs objectForKey:@"keypad"] count];
 
-        self.matchers = [NSArray arrayWithArray:self.dictionaryMatchers];
-        self.matchers = [self.matchers arrayByAddingObjectsFromArray:@[[self l33tMatch], [self digitsMatch],
+        self.matchers = [NSArray arrayWithArray:resource.dictionaryMatchers];
+        MatcherBlock l33tMatcherBlock = [self l33tMatchFromDictionaryMatchers:resource.dictionaryMatchers];
+        self.matchers = [self.matchers arrayByAddingObjectsFromArray:@[l33tMatcherBlock, [self digitsMatch],
                                                                        [self yearMatch], [self dateMatch],
                                                                        [self repeatMatch], [self sequenceMatch],
                                                                        [self spatialMatch]]];
@@ -244,7 +243,7 @@
     return subDicts;
 }
 
-- (MatcherBlock)l33tMatch
+- (MatcherBlock)l33tMatchFromDictionaryMatchers:(NSArray<MatcherBlock> *)dictionaryMatchers
 {
     __weak typeof(self) weakSelf = self;
     MatcherBlock block = ^ NSArray* (NSString *password) {
@@ -256,7 +255,7 @@
 
             NSString *subbedPassword = [weakSelf translate:password characterMap:sub];
 
-            for (MatcherBlock matcher in weakSelf.dictionaryMatchers) {
+            for (MatcherBlock matcher in dictionaryMatchers) {
                 for (DBMatch *match in matcher(subbedPassword)) {
 
                     NSString *token = [password substringWithRange:NSMakeRange(match.i, match.j - match.i + 1)];

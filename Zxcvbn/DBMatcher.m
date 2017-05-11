@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) NSArray<MatcherBlock> *dictionaryMatchers;
 @property (nonatomic, strong) NSDictionary<NSString *, NSDictionary<NSString *, NSArray<NSString *> *> *> *graphs;
-@property (nonatomic, strong) NSMutableArray<MatcherBlock> *matchers;
+@property (nonatomic, strong) NSArray<MatcherBlock> *matchers;
 
 @end
 
@@ -35,11 +35,11 @@
         self.keyboardStartingPositions = [[self.graphs objectForKey:@"qwerty"] count];
         self.keypadStartingPositions = [[self.graphs objectForKey:@"keypad"] count];
 
-        self.matchers = [[NSMutableArray alloc] initWithArray:self.dictionaryMatchers];
-        [self.matchers addObjectsFromArray:@[[self l33tMatch],
-                                             [self digitsMatch], [self yearMatch], [self dateMatch],
-                                             [self repeatMatch], [self sequenceMatch],
-                                             [self spatialMatch]]];
+        self.matchers = [NSArray arrayWithArray:self.dictionaryMatchers];
+        self.matchers = [self.matchers arrayByAddingObjectsFromArray:@[[self l33tMatch], [self digitsMatch],
+                                                                       [self yearMatch], [self dateMatch],
+                                                                       [self repeatMatch], [self sequenceMatch],
+                                                                       [self spatialMatch]]];
     }
 
     return self;
@@ -54,7 +54,7 @@
         for (int i = 0; i < [userInputs count]; i++) {
             [rankedUserInputsDict setObject:[NSNumber numberWithInt:i + 1] forKey:[userInputs[i] lowercaseString]];
         }
-        [self.matchers addObject:[self buildDictMatcher:@"user_inputs" rankedDict:rankedUserInputsDict]];
+        self.matchers = [self.matchers arrayByAddingObject:[self buildDictMatcher:@"user_inputs" rankedDict:rankedUserInputsDict]];
     }
     
     NSMutableArray<DBMatch *> *matches = [[NSMutableArray alloc] init];

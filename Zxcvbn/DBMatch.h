@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @interface DBMatch : NSObject
 
@@ -14,8 +15,8 @@
 @property (strong, nonatomic) NSString *token;
 @property (nonatomic, assign) NSUInteger i;
 @property (nonatomic, assign) NSUInteger j;
-@property (nonatomic, assign) float entropy;
-@property (nonatomic, assign) int cardinality;
+@property (nonatomic, assign) CGFloat entropy;
+@property (nonatomic, assign) NSInteger cardinality;
 
 // Dictionary
 @property (strong, nonatomic) NSString *matchedWord;

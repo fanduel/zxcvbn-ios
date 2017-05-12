@@ -200,8 +200,6 @@
 
     if ([match.pattern isEqualToString:@"year"]) {
         match.entropy = [self yearEntropy:match];
-    } else if ([match.pattern isEqualToString:@"date"]) {
-        match.entropy = [self dateEntropy:match];
     } else if ([match.pattern isEqualToString:@"spatial"]) {
         match.entropy = [self spatialEntropy:match];
     } else if ([match.pattern isEqualToString:@"dictionary"]) {
@@ -212,28 +210,11 @@
 }
 
 static int kNumYears = 119; // years match against 1900 - 2019
-static int kNumMonths = 12;
-static int kNumDays = 31;
 
 - (float)yearEntropy:(DBMatch *)match
 {
     return lg(kNumYears);
 }
-
-- (float)dateEntropy:(DBMatch *)match
-{
-    float entropy = 0.0;
-    if (match.year < 100) {
-        entropy = lg(kNumDays * kNumMonths * 100); // two-digit year
-    } else {
-        entropy = lg(kNumDays * kNumMonths * kNumYears); // four-digit year
-    }
-    if ([match.separator length]) {
-        entropy += 2; // add two bits for separator selection [/,-,.,etc]
-    }
-    return entropy;
-}
-
 - (float)spatialEntropy:(DBMatch *)match
 {
     NSUInteger s;

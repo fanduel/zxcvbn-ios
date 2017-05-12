@@ -198,9 +198,7 @@
         return match.entropy;
     }
 
-    if ([match.pattern isEqualToString:@"year"]) {
-        match.entropy = [self yearEntropy:match];
-    } else if ([match.pattern isEqualToString:@"spatial"]) {
+    if ([match.pattern isEqualToString:@"spatial"]) {
         match.entropy = [self spatialEntropy:match];
     } else if ([match.pattern isEqualToString:@"dictionary"]) {
         match.entropy = [self dictionaryEntropy:match];
@@ -209,12 +207,6 @@
     return match.entropy;
 }
 
-static int kNumYears = 119; // years match against 1900 - 2019
-
-- (float)yearEntropy:(DBMatch *)match
-{
-    return lg(kNumYears);
-}
 - (float)spatialEntropy:(DBMatch *)match
 {
     NSUInteger s;

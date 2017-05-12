@@ -8,6 +8,15 @@
 
 #import "DBYearMatch.h"
 
+#import "DBUtilities.h"
+
 @implementation DBYearMatch
+
+static int kNumYears = 119; // years match against 1900 - 2019
+
+- (CGFloat)entropy
+{
+    return lg(kNumYears);
+}
 
 @end

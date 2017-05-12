@@ -11,6 +11,7 @@
 #import "DBMatcher.h"
 #import "DBResult.h"
 #import "DBMatch.h"
+#import "DBSequenceMatch.h"
 #import "DBMatchResources.h"
 #import "DBUtilities.h"
 
@@ -199,7 +200,7 @@
     }
 
     if ([match.pattern isEqualToString:@"sequence"]) {
-        match.entropy = [self sequenceEntropy:match];
+        match.entropy = [self sequenceEntropy:(DBSequenceMatch *)match];
     } else if ([match.pattern isEqualToString:@"digits"]) {
         match.entropy = [self digitsEntropy:match];
     } else if ([match.pattern isEqualToString:@"year"]) {
@@ -215,7 +216,7 @@
     return match.entropy;
 }
 
-- (float)sequenceEntropy:(DBMatch *)match
+- (float)sequenceEntropy:(DBSequenceMatch *)match
 {
     NSString *firstChr = [match.token substringToIndex:1];
     float baseEntropy = 0;

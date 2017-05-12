@@ -36,11 +36,6 @@
 @property (nonatomic, assign) int turns;
 @property (nonatomic, assign) int shiftedCount;
 
-// Sequence
-@property (strong, nonatomic) NSString *sequenceName;
-@property (nonatomic, assign) int sequenceSpace;
-@property (nonatomic, assign) BOOL ascending;
-
 // Date
 @property (nonatomic, assign) int day;
 @property (nonatomic, assign) int month;

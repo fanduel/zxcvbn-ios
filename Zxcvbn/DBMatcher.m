@@ -9,6 +9,7 @@
 #import "DBMatcher.h"
 #import "DBMatch.h"
 #import "DBRepeatMatch.h"
+#import "DBSequenceMatch.h"
 #import "DBMatchResources.h"
 
 @interface DBMatcher ()
@@ -423,7 +424,7 @@
                         j++;
                     } else {
                         if (j - i > 2) { // don't consider length 1 or 2 chains.
-                            DBMatch *match = [[DBMatch alloc] init];
+                            DBSequenceMatch *match = [[DBSequenceMatch alloc] init];
                             match.pattern = @"sequence";
                             match.i = i;
                             match.j = j - 1;

@@ -37,8 +37,6 @@
 @property (nonatomic, assign) int shiftedCount;
 
 // Date
-@property (nonatomic, assign) int day;
-@property (nonatomic, assign) int month;
 @property (nonatomic, assign) int year;
 @property (strong, nonatomic) NSString *separator;
 

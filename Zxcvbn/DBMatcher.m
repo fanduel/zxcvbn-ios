@@ -8,6 +8,7 @@
 
 #import "DBMatcher.h"
 #import "DBMatch.h"
+#import "DBDateMatch.h"
 #import "DBRepeatMatch.h"
 #import "DBSequenceMatch.h"
 #import "DBMatchResources.h"
@@ -455,13 +456,10 @@
 
     for (NSTextCheckingResult *result in [rx matchesInString:password options:0 range:NSMakeRange(0, [password length])]) {
         
-        DBMatch *match = [[DBMatch alloc] init];
-        match.pattern = patternName;
-        match.i = [result range].location;
-        match.j = [result range].length + match.i - 1;
-        match.token = [password substringWithRange:[result range]];
+        DBMatch *match;
         
-        if ([match.pattern isEqualToString:@"date"] && [result numberOfRanges] == 6) {
+        if ([patternName isEqualToString:@"date"] && [result numberOfRanges] == 6) {
+            DBDateMatch *dateMatch = [[DBDateMatch alloc] init];
             int month;
             int day;
             int year;
@@ -474,7 +472,7 @@
                 continue;
             }
             
-            match.separator = [result rangeAtIndex:2].location < [password length] ? [password substringWithRange:[result rangeAtIndex:2]] : @"";
+            dateMatch.separator = [result rangeAtIndex:2].location < [password length] ? [password substringWithRange:[result rangeAtIndex:2]] : @"";
             
             if (month >= 12 && month <= 31 && day <= 12) { // tolerate both day-month and month-day order
                 int temp = day;
@@ -490,11 +488,17 @@
                 year += 1900;
             }
             
-            match.day = day;
-            match.month = month;
-            match.year = year;
+            dateMatch.day = day;
+            dateMatch.month = month;
+            dateMatch.year = year;
+            match = dateMatch;
+        } else {
+            match = [[DBMatch alloc] init];
         }
-        
+        match.pattern = patternName;
+        match.i = [result range].location;
+        match.j = [result range].length + match.i - 1;
+        match.token = [password substringWithRange:[result range]];
         [matches addObject:match];
     }
 

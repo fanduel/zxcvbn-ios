@@ -11,6 +11,7 @@
 #import "DBDateMatch.h"
 #import "DBRepeatMatch.h"
 #import "DBSequenceMatch.h"
+#import "DBSpatialMatch.h"
 #import "DBMatchResources.h"
 
 @interface DBMatcher ()
@@ -330,7 +331,7 @@
             // otherwise push the pattern discovered so far, if any...
             } else {
                 if (j - i > 2) { // don't consider length 1 or 2 chains.
-                    DBMatch *match = [[DBMatch alloc] init];
+                    DBSpatialMatch *match = [[DBSpatialMatch alloc] init];
                     match.pattern = @"spatial";
                     match.i = i;
                     match.j = j - 1;

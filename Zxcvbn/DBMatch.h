@@ -31,9 +31,4 @@
 @property (strong, nonatomic) NSString *subDisplay;
 @property (nonatomic, assign) int l33tEntropy;
 
-// Spatial
-@property (strong, nonatomic) NSString *graph;
-@property (nonatomic, assign) int turns;
-@property (nonatomic, assign) int shiftedCount;
-
 @end

@@ -11,6 +11,7 @@
 #import "DBMatcher.h"
 #import "DBResult.h"
 #import "DBMatch.h"
+#import "DBSpatialMatch.h"
 #import "DBMatchResources.h"
 #import "DBUtilities.h"
 
@@ -199,7 +200,7 @@
     }
 
     if ([match.pattern isEqualToString:@"spatial"]) {
-        match.entropy = [self spatialEntropy:match];
+        match.entropy = [self spatialEntropy:(DBSpatialMatch *)match];
     } else if ([match.pattern isEqualToString:@"dictionary"]) {
         match.entropy = [self dictionaryEntropy:match];
     }
@@ -207,7 +208,7 @@
     return match.entropy;
 }
 
-- (float)spatialEntropy:(DBMatch *)match
+- (float)spatialEntropy:(DBSpatialMatch *)match
 {
     NSUInteger s;
     NSUInteger d;

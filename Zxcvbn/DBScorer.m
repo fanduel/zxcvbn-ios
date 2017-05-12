@@ -198,9 +198,7 @@
         return match.entropy;
     }
 
-    if ([match.pattern isEqualToString:@"repeat"]) {
-        match.entropy = [self repeatEntropy:match];
-    } else if ([match.pattern isEqualToString:@"sequence"]) {
+    if ([match.pattern isEqualToString:@"sequence"]) {
         match.entropy = [self sequenceEntropy:match];
     } else if ([match.pattern isEqualToString:@"digits"]) {
         match.entropy = [self digitsEntropy:match];
@@ -215,12 +213,6 @@
     }
 
     return match.entropy;
-}
-
-- (float)repeatEntropy:(DBMatch *)match
-{
-    float cardinality = [DBUtilities calcBruteForceCardinalityForPassword:match.token];
-    return lg(cardinality * [match.token length]);
 }
 
 - (float)sequenceEntropy:(DBMatch *)match

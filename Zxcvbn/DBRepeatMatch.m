@@ -8,6 +8,14 @@
 
 #import "DBRepeatMatch.h"
 
+#import "DBUtilities.h"
+
 @implementation DBRepeatMatch
+
+- (CGFloat)entropy
+{
+    float cardinality = [DBUtilities calcBruteForceCardinalityForPassword:self.token];
+    return lg(cardinality * [self.token length]);
+}
 
 @end

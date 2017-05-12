@@ -36,9 +36,6 @@
 @property (nonatomic, assign) int turns;
 @property (nonatomic, assign) int shiftedCount;
 
-// Repeat
-@property (strong, nonatomic) NSString *repeatedChar;
-
 // Sequence
 @property (strong, nonatomic) NSString *sequenceName;
 @property (nonatomic, assign) int sequenceSpace;

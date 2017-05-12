@@ -15,6 +15,8 @@
 		B04FA2881EC335BD00429DC3 /* DBMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2861EC335BD00429DC3 /* DBMatch.m */; };
 		B04FA2AE1EC372E200429DC3 /* DBMatchResources.h in Headers */ = {isa = PBXBuildFile; fileRef = B04FA2AC1EC372E200429DC3 /* DBMatchResources.h */; };
 		B04FA2AF1EC372E200429DC3 /* DBMatchResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2AD1EC372E200429DC3 /* DBMatchResources.m */; };
+		B04FA2D11EC4C0DC00429DC3 /* DBRepeatMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = B04FA2CF1EC4C0DC00429DC3 /* DBRepeatMatch.h */; };
+		B04FA2D21EC4C0DC00429DC3 /* DBRepeatMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2D01EC4C0DC00429DC3 /* DBRepeatMatch.m */; };
 		B04FA2D51EC4C1FB00429DC3 /* DBUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = B04FA2D31EC4C1FB00429DC3 /* DBUtilities.h */; };
 		B04FA2D61EC4C1FB00429DC3 /* DBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2D41EC4C1FB00429DC3 /* DBUtilities.m */; };
 		D80ECB6C1BDEAA420055EF0A /* Zxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,6 +55,8 @@
 		B04FA2861EC335BD00429DC3 /* DBMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMatch.m; sourceTree = "<group>"; };
 		B04FA2AC1EC372E200429DC3 /* DBMatchResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMatchResources.h; sourceTree = "<group>"; };
 		B04FA2AD1EC372E200429DC3 /* DBMatchResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMatchResources.m; sourceTree = "<group>"; };
+		B04FA2CF1EC4C0DC00429DC3 /* DBRepeatMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRepeatMatch.h; sourceTree = "<group>"; };
+		B04FA2D01EC4C0DC00429DC3 /* DBRepeatMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRepeatMatch.m; sourceTree = "<group>"; };
 		B04FA2D31EC4C1FB00429DC3 /* DBUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBUtilities.h; sourceTree = "<group>"; };
 		B04FA2D41EC4C1FB00429DC3 /* DBUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBUtilities.m; sourceTree = "<group>"; };
 		D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Zxcvbn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,10 +99,22 @@
 		B04FA2B01EC372F100429DC3 /* DBMatcher */ = {
 			isa = PBXGroup;
 			children = (
+				B04FA2C61EC4B2AE00429DC3 /* DBMatch */,
 				B04FA2AC1EC372E200429DC3 /* DBMatchResources.h */,
 				B04FA2AD1EC372E200429DC3 /* DBMatchResources.m */,
 			);
 			name = DBMatcher;
+			sourceTree = "<group>";
+		};
+		B04FA2C61EC4B2AE00429DC3 /* DBMatch */ = {
+			isa = PBXGroup;
+			children = (
+				B04FA2851EC335BD00429DC3 /* DBMatch.h */,
+				B04FA2861EC335BD00429DC3 /* DBMatch.m */,
+				B04FA2CF1EC4C0DC00429DC3 /* DBRepeatMatch.h */,
+				B04FA2D01EC4C0DC00429DC3 /* DBRepeatMatch.m */,
+			);
+			name = DBMatch;
 			sourceTree = "<group>";
 		};
 		D80ECB5E1BDEAA420055EF0A = {
@@ -123,8 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */,
-				B04FA2851EC335BD00429DC3 /* DBMatch.h */,
-				B04FA2861EC335BD00429DC3 /* DBMatch.m */,
 				D80ECB821BDEAA7D0055EF0A /* DBMatcher.h */,
 				D80ECB831BDEAA7D0055EF0A /* DBMatcher.m */,
 				B04FA2811EC333D400429DC3 /* DBResult.h */,
@@ -174,6 +188,7 @@
 				D80ECB8B1BDEAA7D0055EF0A /* DBMatcher.h in Headers */,
 				D80ECB911BDEAA7D0055EF0A /* DBScorer.h in Headers */,
 				D80ECB941BDEAA7D0055EF0A /* DBZxcvbn.h in Headers */,
+				B04FA2D11EC4C0DC00429DC3 /* DBRepeatMatch.h in Headers */,
 				D80ECB8E1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h in Headers */,
 				B04FA2D51EC4C1FB00429DC3 /* DBUtilities.h in Headers */,
 				B04FA2AE1EC372E200429DC3 /* DBMatchResources.h in Headers */,
@@ -284,6 +299,7 @@
 				B04FA2D61EC4C1FB00429DC3 /* DBUtilities.m in Sources */,
 				D80ECB921BDEAA7D0055EF0A /* DBScorer.m in Sources */,
 				B04FA2841EC333D400429DC3 /* DBResult.m in Sources */,
+				B04FA2D21EC4C0DC00429DC3 /* DBRepeatMatch.m in Sources */,
 				D80ECB8F1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m in Sources */,
 				B04FA2881EC335BD00429DC3 /* DBMatch.m in Sources */,
 				B04FA2AF1EC372E200429DC3 /* DBMatchResources.m in Sources */,

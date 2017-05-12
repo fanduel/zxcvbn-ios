@@ -12,6 +12,7 @@
 #import "DBResult.h"
 #import "DBMatch.h"
 #import "DBMatchResources.h"
+#import "DBUtilities.h"
 
 @interface DBScorer ()
 
@@ -63,7 +64,7 @@
      minimum entropy. O(nm) dp alg for length-n password with m candidate matches.
      */
     
-    float bruteforceCardinality = [self calcBruteforceCardinality:password]; // e.g. 26 for lowercase
+    float bruteforceCardinality = [DBUtilities calcBruteForceCardinalityForPassword:password]; // e.g. 26 for lowercase
     
     NSMutableArray *upToK = [[NSMutableArray alloc] init]; // minimum entropy up to k.
     NSMutableArray *backpointers = [[NSMutableArray alloc] init]; // for the optimal sequence of matches up to k, holds the final match (match.j == k). null means the sequence ends w/ a brute-force character.
@@ -141,7 +142,7 @@
     result.entropy = roundToXDigits(minEntropy, 3);
     result.matchSequence = matchSequence;
     result.crackTime = roundToXDigits(crackTime, 3);
-    result.crackTimeDisplay = [self displayTime:crackTime];
+    result.crackTimeDisplay = [DBUtilities displayTimeForSeconds:crackTime];
     result.score = [self crackTimeToScore:crackTime];
     return result;
 }
@@ -218,7 +219,7 @@
 
 - (float)repeatEntropy:(DBMatch *)match
 {
-    float cardinality = [self calcBruteforceCardinality:match.token];
+    float cardinality = [DBUtilities calcBruteForceCardinalityForPassword:match.token];
     return lg(cardinality * [match.token length]);
 }
 
@@ -303,7 +304,7 @@ static int kNumDays = 31;
         for (int i = 0; i <= MIN(S, U); i++) {
             possibilities += binom(S + U, i);
         }
-        entropy += lg(possibilities);
+        entropy += log2f(possibilities);
     }
     return entropy;
 }
@@ -374,91 +375,6 @@ static int kNumDays = 31;
 
     // corner: return 1 bit for single-letter subs, like 4pple -> apple, instead of 0.
     return possibilities <= 1 ? 1 : lg(possibilities);
-}
-
-#pragma mark - utilities
-
-- (float)calcBruteforceCardinality:(NSString *)password
-{
-    int digits = 0;
-    int upper = 0;
-    int lower = 0;
-    int symbols = 0;
-
-    for (int i = 0; i < [password length]; i++) {
-        unichar chr = [password characterAtIndex:i];
-
-        if ([[NSCharacterSet decimalDigitCharacterSet] characterIsMember:chr]) {
-            digits = 10;
-        } else if ([[NSCharacterSet uppercaseLetterCharacterSet] characterIsMember:chr]) {
-            upper = 26;
-        } else if ([[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:chr]) {
-            lower = 26;
-        } else {
-            symbols = 33;
-        }
-    }
-
-    return digits + upper + lower + symbols;
-}
-
-- (NSString *)displayTime:(float)seconds
-{
-    int minute = 60;
-    int hour = minute * 60;
-    int day = hour * 24;
-    int month = day * 31;
-    int year = month * 12;
-    int century = year * 100;
-    if (seconds < minute)
-        return @"instant";
-    if (seconds < hour)
-        return [NSString stringWithFormat:@"%d minutes", 1 + (int)ceil(seconds / minute)];
-    if (seconds < day)
-        return [NSString stringWithFormat:@"%d hours", 1 + (int)ceil(seconds / hour)];
-    if (seconds < month)
-        return [NSString stringWithFormat:@"%d days", 1 + (int)ceil(seconds / day)];
-    if (seconds < year)
-        return [NSString stringWithFormat:@"%d months", 1 + (int)ceil(seconds / month)];
-    if (seconds < century)
-        return [NSString stringWithFormat:@"%d years", 1 + (int)ceil(seconds / year)];
-    return @"centuries";
-}
-
-#pragma mark - functions
-
-float binom(NSUInteger n, NSUInteger k)
-{
-    // Returns binomial coefficient (n choose k).
-    // http://blog.plover.com/math/choose.html
-    if (k > n) { return 0; }
-    if (k == 0) { return 1; }
-    float result = 1;
-    for (int denom = 1; denom <= k; denom++) {
-        result *= n;
-        result /= denom;
-        n -= 1;
-    }
-    return result;
-}
-
-float lg(float n)
-{
-    return log2f(n);
-}
-
-NSString* roundToXDigits(float number, int digits)
-{
-    //return round(number * pow(10, digits)) / pow(10, digits);
-    return [NSString stringWithFormat:@"%.*f", digits, number];
-}
-
-id get(NSArray *a, int i)
-{
-    if (i < 0 || i >= [a count]) {
-        return 0;
-    }
-    return [a objectAtIndex:i];
 }
 
 @end

@@ -25,6 +25,8 @@
 		B04FA2E11EC606D900429DC3 /* DBDigitsMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2DF1EC606D900429DC3 /* DBDigitsMatch.m */; };
 		B04FA2E41EC6088600429DC3 /* DBDateMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = B04FA2E21EC6088600429DC3 /* DBDateMatch.h */; };
 		B04FA2E51EC6088600429DC3 /* DBDateMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2E31EC6088600429DC3 /* DBDateMatch.m */; };
+		B04FA2E81EC60CC800429DC3 /* DBYearMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = B04FA2E61EC60CC800429DC3 /* DBYearMatch.h */; };
+		B04FA2E91EC60CC800429DC3 /* DBYearMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2E71EC60CC800429DC3 /* DBYearMatch.m */; };
 		D80ECB6C1BDEAA420055EF0A /* Zxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB731BDEAA420055EF0A /* Zxcvbn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */; };
 		D80ECB781BDEAA420055EF0A /* ZxcvbnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB771BDEAA420055EF0A /* ZxcvbnTests.m */; };
@@ -71,6 +73,8 @@
 		B04FA2DF1EC606D900429DC3 /* DBDigitsMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDigitsMatch.m; sourceTree = "<group>"; };
 		B04FA2E21EC6088600429DC3 /* DBDateMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDateMatch.h; sourceTree = "<group>"; };
 		B04FA2E31EC6088600429DC3 /* DBDateMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDateMatch.m; sourceTree = "<group>"; };
+		B04FA2E61EC60CC800429DC3 /* DBYearMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBYearMatch.h; sourceTree = "<group>"; };
+		B04FA2E71EC60CC800429DC3 /* DBYearMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBYearMatch.m; sourceTree = "<group>"; };
 		D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Zxcvbn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Zxcvbn.h; sourceTree = "<group>"; };
 		D80ECB6D1BDEAA420055EF0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 				B04FA2DB1EC601BD00429DC3 /* DBSequenceMatch.m */,
 				B04FA2E21EC6088600429DC3 /* DBDateMatch.h */,
 				B04FA2E31EC6088600429DC3 /* DBDateMatch.m */,
+				B04FA2E61EC60CC800429DC3 /* DBYearMatch.h */,
+				B04FA2E71EC60CC800429DC3 /* DBYearMatch.m */,
 			);
 			name = DBMatch;
 			sourceTree = "<group>";
@@ -208,6 +214,7 @@
 				D80ECB911BDEAA7D0055EF0A /* DBScorer.h in Headers */,
 				B04FA2DC1EC601BD00429DC3 /* DBSequenceMatch.h in Headers */,
 				D80ECB941BDEAA7D0055EF0A /* DBZxcvbn.h in Headers */,
+				B04FA2E81EC60CC800429DC3 /* DBYearMatch.h in Headers */,
 				B04FA2D11EC4C0DC00429DC3 /* DBRepeatMatch.h in Headers */,
 				D80ECB8E1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h in Headers */,
 				B04FA2D51EC4C1FB00429DC3 /* DBUtilities.h in Headers */,
@@ -318,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B04FA2E51EC6088600429DC3 /* DBDateMatch.m in Sources */,
+				B04FA2E91EC60CC800429DC3 /* DBYearMatch.m in Sources */,
 				B04FA2D61EC4C1FB00429DC3 /* DBUtilities.m in Sources */,
 				D80ECB921BDEAA7D0055EF0A /* DBScorer.m in Sources */,
 				B04FA2DD1EC601BD00429DC3 /* DBSequenceMatch.m in Sources */,

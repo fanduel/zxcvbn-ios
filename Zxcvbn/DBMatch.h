@@ -36,8 +36,4 @@
 @property (nonatomic, assign) int turns;
 @property (nonatomic, assign) int shiftedCount;
 
-// Date
-@property (nonatomic, assign) int year;
-@property (strong, nonatomic) NSString *separator;
-
 @end

@@ -11,7 +11,6 @@
 #import "DBMatcher.h"
 #import "DBResult.h"
 #import "DBMatch.h"
-#import "DBSequenceMatch.h"
 #import "DBMatchResources.h"
 #import "DBUtilities.h"
 
@@ -199,9 +198,7 @@
         return match.entropy;
     }
 
-    if ([match.pattern isEqualToString:@"sequence"]) {
-        match.entropy = [self sequenceEntropy:(DBSequenceMatch *)match];
-    } else if ([match.pattern isEqualToString:@"digits"]) {
+    if ([match.pattern isEqualToString:@"digits"]) {
         match.entropy = [self digitsEntropy:match];
     } else if ([match.pattern isEqualToString:@"year"]) {
         match.entropy = [self yearEntropy:match];
@@ -214,28 +211,6 @@
     }
 
     return match.entropy;
-}
-
-- (float)sequenceEntropy:(DBSequenceMatch *)match
-{
-    NSString *firstChr = [match.token substringToIndex:1];
-    float baseEntropy = 0;
-    if ([@[@"a", @"1"] containsObject:firstChr]) {
-        baseEntropy = 1;
-    } else {
-        unichar chr = [firstChr characterAtIndex:0];
-        if ([[NSCharacterSet decimalDigitCharacterSet] characterIsMember:chr]) {
-            baseEntropy = lg(10); // digits
-        } else if ([[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:chr]) {
-            baseEntropy = lg(26); // lower
-        } else {
-            baseEntropy = lg(26) + 1; // extra bit for uppercase
-        }
-    }
-    if (!match.ascending) {
-        baseEntropy += 1; // extra bit for descending instead of ascending
-    }
-    return baseEntropy + lg([match.token length]);
 }
 
 - (float)digitsEntropy:(DBMatch *)match

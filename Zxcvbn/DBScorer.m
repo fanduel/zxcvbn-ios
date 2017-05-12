@@ -198,9 +198,7 @@
         return match.entropy;
     }
 
-    if ([match.pattern isEqualToString:@"digits"]) {
-        match.entropy = [self digitsEntropy:match];
-    } else if ([match.pattern isEqualToString:@"year"]) {
+    if ([match.pattern isEqualToString:@"year"]) {
         match.entropy = [self yearEntropy:match];
     } else if ([match.pattern isEqualToString:@"date"]) {
         match.entropy = [self dateEntropy:match];
@@ -211,11 +209,6 @@
     }
 
     return match.entropy;
-}
-
-- (float)digitsEntropy:(DBMatch *)match
-{
-    return lg(pow(10, [match.token length]));
 }
 
 static int kNumYears = 119; // years match against 1900 - 2019

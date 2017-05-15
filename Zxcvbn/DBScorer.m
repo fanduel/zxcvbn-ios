@@ -11,7 +11,6 @@
 #import "DBMatcher.h"
 #import "DBResult.h"
 #import "DBMatch.h"
-#import "DBDictionaryMatch.h"
 #import "DBMatchResources.h"
 #import "DBUtilities.h"
 
@@ -158,80 +157,7 @@
         // a match's entropy doesn't change. cache it.
         return match.entropy;
     }
-
-    if ([match.pattern isEqualToString:@"dictionary"]) {
-        match.entropy = [self dictionaryEntropy:(DBDictionaryMatch *)match];
-    }
-
     return match.entropy;
-}
-
-- (float)dictionaryEntropy:(DBDictionaryMatch *)match
-{
-    match.baseEntropy = lg(match.rank); // keep these as properties for display purposes
-    match.upperCaseEntropy = [self extraUppercaseEntropy:match];
-    match.l33tEntropy = [self extraL33tEntropy:match];
-    return match.baseEntropy + match.upperCaseEntropy + match.l33tEntropy;
-}
-
-- (float)extraUppercaseEntropy:(DBMatch *)match
-{
-    NSString *word = match.token;
-    if ([word rangeOfCharacterFromSet:[NSCharacterSet uppercaseLetterCharacterSet]].location == NSNotFound) {
-        return 0; // all lower
-    }
-
-    // a capitalized word is the most common capitalization scheme,
-    // so it only doubles the search space (uncapitalized + capitalized): 1 extra bit of entropy.
-    // allcaps and end-capitalized are common enough too, underestimate as 1 extra bit to be safe.
-    NSString *startUpper = @"^[A-Z][^A-Z]+$";
-    NSString *endUpper = @"^[^A-Z]+[A-Z]$";
-    NSString *allUpper = @"^[A-Z]+$";
-    for (NSString *regex in @[startUpper, endUpper, allUpper]) {
-        if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex] evaluateWithObject:word]) {
-            return 1;
-        }
-    }
-
-    // otherwise calculate the number of ways to capitalize U+L uppercase+lowercase letters with U uppercase letters or less.
-    // or, if there's more uppercase than lower (for e.g. PASSwORD), the number of ways to lowercase U+L letters with L lowercase letters or less.
-    int uppercaseLength = 0;
-    int lowercaseLength = 0;
-    for (int i = 0; i < [word length]; i++) {
-        unichar chr = [word characterAtIndex:i];
-        if ([[NSCharacterSet uppercaseLetterCharacterSet] characterIsMember:chr]) {
-            uppercaseLength++;
-        } else if ([[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:chr]) {
-            lowercaseLength++;
-        }
-    }
-
-    float possibilities = 0.0;
-    for (int i = 0; i <= MIN(uppercaseLength, lowercaseLength); i++) {
-        possibilities += binom(uppercaseLength + lowercaseLength, i);
-    }
-    return lg(possibilities);
-}
-
-- (int)extraL33tEntropy:(DBDictionaryMatch *)match
-{
-    if (!match.l33t) {
-        return 0;
-    }
-
-    int possibilities = 0;
-
-    for (NSString *subbed in [match.sub allKeys]) {
-        NSString *unsubbed = [match.sub objectForKey:subbed];
-        NSUInteger subLength = [[match.token componentsSeparatedByString:subbed] count] - 1;
-        NSUInteger unsubLength = [[match.token componentsSeparatedByString:unsubbed] count] - 1;
-        for (int i = 0; i <= MIN(unsubLength, subLength); i++) {
-            possibilities += binom(unsubLength + subLength, i);
-        }
-    }
-
-    // corner: return 1 bit for single-letter subs, like 4pple -> apple, instead of 0.
-    return possibilities <= 1 ? 1 : lg(possibilities);
 }
 
 @end

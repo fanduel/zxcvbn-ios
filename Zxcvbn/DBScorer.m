@@ -40,7 +40,7 @@
                 continue;
             }
             // see if best entropy up to i-1 + entropy of this match is less than the current minimum at j.
-            float candidateEntropy = [get(upToK, (int)i-1) floatValue] + [self calcEntropy:match];
+            float candidateEntropy = [get(upToK, (int)i-1) floatValue] + match.entropy;
             if (candidateEntropy < [[upToK objectAtIndex:j] floatValue]) {
                 [upToK insertObject:[NSNumber numberWithFloat:candidateEntropy] atIndex:j];
                 [backpointers insertObject:match atIndex:j];
@@ -147,17 +147,6 @@
         return 3;
     }
     return 4;
-}
-
-#pragma mark - entropy calcs -- one function per match pattern
-
-- (float)calcEntropy:(DBMatch *)match
-{
-    if (match.entropy > 0) {
-        // a match's entropy doesn't change. cache it.
-        return match.entropy;
-    }
-    return match.entropy;
 }
 
 @end

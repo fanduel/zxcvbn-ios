@@ -55,6 +55,11 @@
 
 - (CGFloat)entropy
 {
+    return lg([self guesses]);
+}
+
+- (NSUInteger)guesses
+{
     NSUInteger s;
     NSUInteger d;
     if ([@[@"qwerty", @"dvorak"] containsObject:self.graph]) {
@@ -74,19 +79,22 @@
             possibilities += binom(i - 1, j - 1) * s * pow(d, j);
         }
     }
-    float entropy = lg(possibilities);
     // add extra entropy for shifted keys. (% instead of 5, A instead of a.)
     // math is similar to extra entropy from uppercase letters in dictionary matches.
     if (self.shiftedCount) {
         int S = self.shiftedCount;
         NSUInteger U = [self.token length] - self.shiftedCount; // unshifted count
-        NSUInteger possibilities = 0;
-        for (int i = 0; i <= MIN(S, U); i++) {
-            possibilities += binom(S + U, i);
+        NSUInteger shiftPossibilities = 0;
+        if (S == 0 || U == 0) {
+            shiftPossibilities = 2;
+        } else {
+            for (int i = 0; i <= MIN(S, U); i++) {
+                shiftPossibilities += binom(S + U, i);
+            }
         }
-        entropy += log2f(possibilities);
+        possibilities *= shiftPossibilities;
     }
-    return entropy;
+    return possibilities;
 }
 
 @end

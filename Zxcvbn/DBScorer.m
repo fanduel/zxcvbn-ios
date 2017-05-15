@@ -11,7 +11,6 @@
 #import "DBMatcher.h"
 #import "DBResult.h"
 #import "DBMatch.h"
-#import "DBSpatialMatch.h"
 #import "DBMatchResources.h"
 #import "DBUtilities.h"
 
@@ -29,10 +28,10 @@
 - (instancetype)init {
     if (self = [super init]) {
         NSDictionary<NSString *, NSDictionary<NSString *, NSArray<NSString *> *> *> *graphs = [DBMatchResources sharedDBMatcherResources].graphs;
-        
+
         self.keyboardAverageDegree = [self calcAverageDegree:[graphs objectForKey:@"qwerty"]];
         self.keypadAverageDegree = [self calcAverageDegree:[graphs objectForKey:@"keypad"]]; // slightly different for keypad/mac keypad, but close enough
-        
+
         self.keyboardStartingPositions = [[graphs objectForKey:@"qwerty"] count];
         self.keypadStartingPositions = [[graphs objectForKey:@"keypad"] count];
     }
@@ -199,49 +198,11 @@
         return match.entropy;
     }
 
-    if ([match.pattern isEqualToString:@"spatial"]) {
-        match.entropy = [self spatialEntropy:(DBSpatialMatch *)match];
-    } else if ([match.pattern isEqualToString:@"dictionary"]) {
+    if ([match.pattern isEqualToString:@"dictionary"]) {
         match.entropy = [self dictionaryEntropy:match];
     }
 
     return match.entropy;
-}
-
-- (float)spatialEntropy:(DBSpatialMatch *)match
-{
-    NSUInteger s;
-    NSUInteger d;
-    if ([@[@"qwerty", @"dvorak"] containsObject:match.graph]) {
-        s = self.keyboardStartingPositions;
-        d = self.keyboardAverageDegree;
-    } else {
-        s = self.keypadStartingPositions;
-        d = self.keypadAverageDegree;
-    }
-    int possibilities = 0;
-    NSUInteger L = [match.token length];
-    int t = match.turns;
-    // estimate the number of possible patterns w/ length L or less with t turns or less.
-    for (int i = 2; i <= L; i++) {
-        int possibleTurns = MIN(t, i - 1);
-        for (int j = 1; j <= possibleTurns; j++) {
-            possibilities += binom(i - 1, j - 1) * s * pow(d, j);
-        }
-    }
-    float entropy = lg(possibilities);
-    // add extra entropy for shifted keys. (% instead of 5, A instead of a.)
-    // math is similar to extra entropy from uppercase letters in dictionary matches.
-    if (match.shiftedCount) {
-        int S = match.shiftedCount;
-        NSUInteger U = [match.token length] - match.shiftedCount; // unshifted count
-        NSUInteger possibilities = 0;
-        for (int i = 0; i <= MIN(S, U); i++) {
-            possibilities += binom(S + U, i);
-        }
-        entropy += log2f(possibilities);
-    }
-    return entropy;
 }
 
 - (float)dictionaryEntropy:(DBMatch *)match

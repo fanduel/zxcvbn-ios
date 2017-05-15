@@ -20,7 +20,7 @@
 }
 
 - (NSUInteger)guesses {
-    return self.rank + self.extraUppercaseGuesses + self.extraL33tGuesses;
+    return (self.rank + self.extraUppercaseGuesses + self.extraL33tGuesses) * (self.reversed ? 2 : 1);
 }
 
 - (float)extraUppercaseEntropy

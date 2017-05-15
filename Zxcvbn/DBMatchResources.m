@@ -56,6 +56,7 @@
             NSMutableDictionary *rankedDict = [self buildRankedDict:wordList];
             
             [dictionaryMatchers addObject:[self buildDictMatcher:dictName rankedDict:rankedDict]];
+            [dictionaryMatchers addObject:[self buildReverseDictMatcher:dictName rankedDict:rankedDict]];
         }
     } else {
         NSLog(@"Error parsing frequency lists: %@", error);
@@ -112,6 +113,36 @@
     return block;
 }
 
+- (MatcherBlock)buildReverseDictMatcher:(NSString *)dictName rankedDict:(NSMutableDictionary *)rankedDict
+{
+    __typeof__(self) __weak weakSelf = self;
+    MatcherBlock block = ^ NSArray* (NSString *password) {
+        NSString *reversedPassword = [self reverseString:password];
+        NSMutableArray *matches = [weakSelf dictionaryMatch:reversedPassword rankedDict:rankedDict];
+        for (DBDictionaryMatch *match in matches) {
+            match.dictionaryName = dictName;
+            match.token = [self reverseString:match.token];
+            match.reversed = YES;
+            NSUInteger i = match.i;
+            NSUInteger j = match.j;
+            match.i = password.length - 1 - j;
+            match.j = password.length - 1 - i;
+        }
+        return matches;
+    };
+    return block;
+}
+
+- (NSString *)reverseString:(NSString *)string {
+    NSMutableString *reversedString = [NSMutableString stringWithCapacity:string.length];
+    [string enumerateSubstringsInRange:NSMakeRange(0, string.length)
+                                 options:(NSStringEnumerationReverse | NSStringEnumerationByComposedCharacterSequences)
+                              usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+                                  [reversedString appendString:substring];
+                              }];
+    return reversedString;
+}
+
 #pragma mark - dictionary match (common passwords, english, last names, etc)
 
 - (NSMutableArray *)dictionaryMatch:(NSString *)password rankedDict:(NSMutableDictionary *)rankedDict
@@ -133,6 +164,7 @@
                 match.token = [password substringWithRange:NSMakeRange(i, j - i + 1)];
                 match.matchedWord = word;
                 match.rank = [rank intValue];
+                match.reversed = NO;
                 [result addObject:match];
             }
         }

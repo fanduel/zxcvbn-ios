@@ -14,47 +14,7 @@
 #import "DBMatchResources.h"
 #import "DBUtilities.h"
 
-@interface DBScorer ()
-
-@property (nonatomic, assign) NSUInteger keyboardAverageDegree;
-@property (nonatomic, assign) NSUInteger keypadAverageDegree;
-@property (nonatomic, assign) NSUInteger keyboardStartingPositions;
-@property (nonatomic, assign) NSUInteger keypadStartingPositions;
-
-@end
-
 @implementation DBScorer
-
-- (instancetype)init {
-    if (self = [super init]) {
-        NSDictionary<NSString *, NSDictionary<NSString *, NSArray<NSString *> *> *> *graphs = [DBMatchResources sharedDBMatcherResources].graphs;
-
-        self.keyboardAverageDegree = [self calcAverageDegree:[graphs objectForKey:@"qwerty"]];
-        self.keypadAverageDegree = [self calcAverageDegree:[graphs objectForKey:@"keypad"]]; // slightly different for keypad/mac keypad, but close enough
-
-        self.keyboardStartingPositions = [[graphs objectForKey:@"qwerty"] count];
-        self.keypadStartingPositions = [[graphs objectForKey:@"keypad"] count];
-    }
-    return self;
-}
-
-- (float)calcAverageDegree:(NSDictionary *)graph
-{
-    // on qwerty, 'g' has degree 6, being adjacent to 'ftyhbv'. '\' has degree 1.
-    // this calculates the average over all keys.
-    float average = 0.0;
-    for (NSString *key in [graph allKeys]) {
-        NSMutableArray *neighbors = [[NSMutableArray alloc] init];
-        for (NSString *n in (NSArray *)[graph objectForKey:key]) {
-            if (n != (id)[NSNull null]) {
-                [neighbors addObject:n];
-            }
-        }
-        average += [neighbors count];
-    }
-    average /= [graph count];
-    return average;
-}
 
 - (DBResult *)minimumEntropyMatchSequence:(NSString *)password matches:(NSArray *)matches
 {

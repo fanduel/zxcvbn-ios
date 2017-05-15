@@ -23,10 +23,6 @@
     return self.rank + self.extraUppercaseGuesses + self.extraL33tGuesses;
 }
 
-- (CGFloat)guessesLog10 {
-    return log10f(self.guesses);
-}
-
 - (float)extraUppercaseEntropy
 {
     return self.extraUppercaseGuesses <= 1 ? 0.0 : lg(self.extraUppercaseGuesses);

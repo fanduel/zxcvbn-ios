@@ -10,4 +10,8 @@
 
 @implementation DBMatch
 
+- (CGFloat)guessesLog10 {
+    return self.guesses <= 1 ? 0.0 : log10f(self.guesses);
+}
+
 @end

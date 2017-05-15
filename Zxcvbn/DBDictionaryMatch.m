@@ -19,7 +19,20 @@
     return self.baseEntropy + self.upperCaseEntropy + self.l33tEntropy;
 }
 
+- (NSUInteger)guesses {
+    return self.rank + self.extraUppercaseGuesses + self.extraL33tGuesses;
+}
+
+- (CGFloat)guessesLog10 {
+    return log10f(self.guesses);
+}
+
 - (float)extraUppercaseEntropy
+{
+    return self.extraUppercaseGuesses <= 1 ? 0.0 : lg(self.extraUppercaseGuesses);
+}
+
+- (NSUInteger)extraUppercaseGuesses
 {
     NSString *word = self.token;
     if ([word rangeOfCharacterFromSet:[NSCharacterSet uppercaseLetterCharacterSet]].location == NSNotFound) {
@@ -51,14 +64,19 @@
         }
     }
     
-    float possibilities = 0.0;
+    NSUInteger possibilities = 0;
     for (int i = 0; i <= MIN(uppercaseLength, lowercaseLength); i++) {
-        possibilities += binom(uppercaseLength + lowercaseLength, i);
+        possibilities += (NSUInteger)binom(uppercaseLength + lowercaseLength, i);
     }
-    return lg(possibilities);
+    return possibilities;
 }
 
-- (int)extraL33tEntropy
+- (CGFloat)extraL33tEntropy {
+    // corner: return 1 bit for single-letter subs, like 4pple -> apple, instead of 0.
+    return self.extraL33tGuesses <= 1 ? 1.0 : lg(self.extraL33tGuesses);
+}
+
+- (NSUInteger)extraL33tGuesses
 {
     if (!self.l33t) {
         return 0;
@@ -74,8 +92,6 @@
             possibilities += binom(unsubLength + subLength, i);
         }
     }
-    
-    // corner: return 1 bit for single-letter subs, like 4pple -> apple, instead of 0.
-    return possibilities <= 1 ? 1 : lg(possibilities);
+    return possibilities;
 }
 @end

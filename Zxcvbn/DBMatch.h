@@ -16,6 +16,8 @@
 @property (nonatomic, assign) NSUInteger i;
 @property (nonatomic, assign) NSUInteger j;
 @property (nonatomic, assign) CGFloat entropy;
+@property (nonatomic, assign) NSUInteger guesses;
+@property (nonatomic, assign) CGFloat guessesLog10;
 @property (nonatomic, assign) NSInteger cardinality;
 
 @end

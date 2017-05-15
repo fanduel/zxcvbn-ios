@@ -9,6 +9,7 @@
 #import "DBMatcher.h"
 #import "DBMatch.h"
 #import "DBDateMatch.h"
+#import "DBDictionaryMatch.h"
 #import "DBRepeatMatch.h"
 #import "DBSequenceMatch.h"
 #import "DBSpatialMatch.h"
@@ -77,7 +78,7 @@
             NSNumber *rank = [rankedDict objectForKey:word];
 
             if (rank != nil) {
-                DBMatch *match = [[DBMatch alloc] init];
+                DBDictionaryMatch *match = [[DBDictionaryMatch alloc] init];
                 match.pattern = @"dictionary";
                 match.i = i;
                 match.j = j;
@@ -99,7 +100,7 @@
 
         NSMutableArray *matches = [weakSelf dictionaryMatch:password rankedDict:rankedDict];
         
-        for (DBMatch *match in matches) {
+        for (DBDictionaryMatch *match in matches) {
             match.dictionaryName = dictName;
         }
 
@@ -235,7 +236,7 @@
             NSString *subbedPassword = [weakSelf translate:password characterMap:sub];
 
             for (MatcherBlock matcher in dictionaryMatchers) {
-                for (DBMatch *match in matcher(subbedPassword)) {
+                for (DBDictionaryMatch *match in matcher(subbedPassword)) {
 
                     NSString *token = [password substringWithRange:NSMakeRange(match.i, match.j - match.i + 1)];
                     if ([[token lowercaseString] isEqualToString:match.matchedWord]) {

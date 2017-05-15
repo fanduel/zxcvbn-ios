@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 
 #import "Zxcvbn.h"
+#import "DBDictionaryMatch.h"
 
 @interface ZxcvbnTests : XCTestCase
 
@@ -34,8 +35,8 @@
     DBZxcvbn *zxcvbn = [[DBZxcvbn alloc] init];
     DBResult *result = [zxcvbn passwordStrength:@"password" userInputs:nil];
     
-    XCTAssertTrue([@"dictionary" isEqualToString:[(DBMatch *)result.matchSequence[0] pattern]]);
-    XCTAssertTrue([@"passwords" isEqualToString:[(DBMatch *)result.matchSequence[0] dictionaryName]]);
+    XCTAssertTrue([@"dictionary" isEqualToString:[(DBDictionaryMatch *)result.matchSequence[0] pattern]]);
+    XCTAssertTrue([@"passwords" isEqualToString:[(DBDictionaryMatch *)result.matchSequence[0] dictionaryName]]);
     
     XCTAssertEqual(result.score, 0);
 

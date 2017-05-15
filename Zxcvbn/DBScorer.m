@@ -11,6 +11,7 @@
 #import "DBMatcher.h"
 #import "DBResult.h"
 #import "DBMatch.h"
+#import "DBDictionaryMatch.h"
 #import "DBMatchResources.h"
 #import "DBUtilities.h"
 
@@ -159,13 +160,13 @@
     }
 
     if ([match.pattern isEqualToString:@"dictionary"]) {
-        match.entropy = [self dictionaryEntropy:match];
+        match.entropy = [self dictionaryEntropy:(DBDictionaryMatch *)match];
     }
 
     return match.entropy;
 }
 
-- (float)dictionaryEntropy:(DBMatch *)match
+- (float)dictionaryEntropy:(DBDictionaryMatch *)match
 {
     match.baseEntropy = lg(match.rank); // keep these as properties for display purposes
     match.upperCaseEntropy = [self extraUppercaseEntropy:match];
@@ -212,7 +213,7 @@
     return lg(possibilities);
 }
 
-- (int)extraL33tEntropy:(DBMatch *)match
+- (int)extraL33tEntropy:(DBDictionaryMatch *)match
 {
     if (!match.l33t) {
         return 0;

@@ -10,6 +10,7 @@
 
 #import "DBResult.h"
 #import "DBMatch.h"
+#import "DBDictionaryMatch.h"
 
 @implementation DBMatchResources
 
@@ -101,7 +102,7 @@
         
         NSMutableArray *matches = [weakSelf dictionaryMatch:password rankedDict:rankedDict];
         
-        for (DBMatch *match in matches) {
+        for (DBDictionaryMatch *match in matches) {
             match.dictionaryName = dictName;
         }
         
@@ -125,7 +126,7 @@
             NSNumber *rank = [rankedDict objectForKey:word];
             
             if (rank != nil) {
-                DBMatch *match = [[DBMatch alloc] init];
+                DBDictionaryMatch *match = [[DBDictionaryMatch alloc] init];
                 match.pattern = @"dictionary";
                 match.i = i;
                 match.j = j;

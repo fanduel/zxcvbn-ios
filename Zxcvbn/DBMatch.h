@@ -18,17 +18,4 @@
 @property (nonatomic, assign) CGFloat entropy;
 @property (nonatomic, assign) NSInteger cardinality;
 
-// Dictionary
-@property (strong, nonatomic) NSString *matchedWord;
-@property (strong, nonatomic) NSString *dictionaryName;
-@property (nonatomic, assign) int rank;
-@property (nonatomic, assign) float baseEntropy;
-@property (nonatomic, assign) float upperCaseEntropy;
-
-// l33t
-@property (nonatomic, assign) BOOL l33t;
-@property (strong, nonatomic) NSDictionary *sub;
-@property (strong, nonatomic) NSString *subDisplay;
-@property (nonatomic, assign) int l33tEntropy;
-
 @end

@@ -11,7 +11,7 @@
 
 @interface DBUtilities : NSObject
 
-+ (CGFloat)calcBruteForceCardinalityForPassword:(NSString *)password;
++ (NSUInteger)calcBruteForceCardinalityForPassword:(NSString *)password;
 
 + (NSString *)displayTimeForSeconds:(CGFloat)seconds;
 

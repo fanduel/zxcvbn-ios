@@ -10,7 +10,7 @@
 
 @implementation DBUtilities
 
-+ (CGFloat)calcBruteForceCardinalityForPassword:(NSString *)password
++ (NSUInteger)calcBruteForceCardinalityForPassword:(NSString *)password
 {
     int digits = 0;
     int upper = 0;

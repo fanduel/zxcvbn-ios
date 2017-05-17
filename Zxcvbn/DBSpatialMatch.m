@@ -53,11 +53,6 @@
     return average;
 }
 
-- (CGFloat)entropy
-{
-    return lg([self guesses]);
-}
-
 - (NSUInteger)guesses
 {
     NSUInteger s;

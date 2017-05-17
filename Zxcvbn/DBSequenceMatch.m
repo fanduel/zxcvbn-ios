@@ -33,9 +33,4 @@
     return baseGuesses * self.token.length;
 }
 
-- (CGFloat)entropy
-{
-    return lg(self.guesses);
-}
-
 @end

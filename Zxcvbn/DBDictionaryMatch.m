@@ -12,20 +12,8 @@
 
 @implementation DBDictionaryMatch
 
-- (CGFloat)entropy {
-    self.baseEntropy = lg(self.rank); // keep these as properties for display purposes
-    self.upperCaseEntropy = [self extraUppercaseEntropy];
-    self.l33tEntropy = [self extraL33tEntropy];
-    return self.baseEntropy + self.upperCaseEntropy + self.l33tEntropy;
-}
-
 - (NSUInteger)guesses {
     return self.rank * self.extraUppercaseGuesses * self.extraL33tGuesses * (self.reversed ? 2 : 1);
-}
-
-- (float)extraUppercaseEntropy
-{
-    return self.extraUppercaseGuesses <= 1 ? 0.0 : lg(self.extraUppercaseGuesses);
 }
 
 - (NSUInteger)extraUppercaseGuesses
@@ -67,11 +55,6 @@
     return possibilities;
 }
 
-- (CGFloat)extraL33tEntropy {
-    // corner: return 1 bit for single-letter subs, like 4pple -> apple, instead of 0.
-    return self.extraL33tGuesses <= 1 ? 1.0 : lg(self.extraL33tGuesses);
-}
-
 - (NSUInteger)extraL33tGuesses
 {
     if (!self.l33t) {
@@ -88,6 +71,6 @@
             possibilities += binom(unsubLength + subLength, i);
         }
     }
-    return possibilities;
+    return possibilities < 2 ? 2 : possibilities;
 }
 @end

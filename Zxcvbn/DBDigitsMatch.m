@@ -12,9 +12,8 @@
 
 @implementation DBDigitsMatch
 
--(CGFloat)entropy
-{
-    return lg(pow(10, [self.token length]));
+- (NSUInteger)guesses {
+    return pow(10, self.token.length);
 }
 
 @end

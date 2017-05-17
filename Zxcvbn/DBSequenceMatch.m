@@ -12,26 +12,30 @@
 
 @implementation DBSequenceMatch
 
-- (CGFloat)entropy
+
+- (NSUInteger)guesses
 {
     NSString *firstChr = [self.token substringToIndex:1];
-    float baseEntropy = 0;
-    if ([@[@"a", @"1"] containsObject:firstChr]) {
-        baseEntropy = 1;
+    NSUInteger baseGuesses;
+    if ([@[@"a", @"A", @"z", @"Z", @"0", @"1", @"9"] containsObject:firstChr]) {
+        baseGuesses = 4;
     } else {
         unichar chr = [firstChr characterAtIndex:0];
         if ([[NSCharacterSet decimalDigitCharacterSet] characterIsMember:chr]) {
-            baseEntropy = lg(10); // digits
-        } else if ([[NSCharacterSet lowercaseLetterCharacterSet] characterIsMember:chr]) {
-            baseEntropy = lg(26); // lower
+            baseGuesses = 10; // digits
         } else {
-            baseEntropy = lg(26) + 1; // extra bit for uppercase
+            baseGuesses = 26; // lower
         }
     }
     if (!self.ascending) {
-        baseEntropy += 1; // extra bit for descending instead of ascending
+        baseGuesses *= 2; // extra bit for descending instead of ascending
     }
-    return baseEntropy + lg([self.token length]);
+    return baseGuesses * self.token.length;
+}
+
+- (CGFloat)entropy
+{
+    return lg(self.guesses);
 }
 
 @end

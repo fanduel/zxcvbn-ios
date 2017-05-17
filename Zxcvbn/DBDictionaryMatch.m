@@ -20,7 +20,7 @@
 }
 
 - (NSUInteger)guesses {
-    return (self.rank + self.extraUppercaseGuesses + self.extraL33tGuesses) * (self.reversed ? 2 : 1);
+    return self.rank * self.extraUppercaseGuesses * self.extraL33tGuesses * (self.reversed ? 2 : 1);
 }
 
 - (float)extraUppercaseEntropy
@@ -32,7 +32,7 @@
 {
     NSString *word = self.token;
     if ([word rangeOfCharacterFromSet:[NSCharacterSet uppercaseLetterCharacterSet]].location == NSNotFound) {
-        return 0; // all lower
+        return 1; // all lower
     }
     
     // a capitalized word is the most common capitalization scheme,
@@ -43,7 +43,7 @@
     NSString *allUpper = @"^[A-Z]+$";
     for (NSString *regex in @[startUpper, endUpper, allUpper]) {
         if ([[NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex] evaluateWithObject:word]) {
-            return 1;
+            return 2;
         }
     }
     
@@ -75,7 +75,7 @@
 - (NSUInteger)extraL33tGuesses
 {
     if (!self.l33t) {
-        return 0;
+        return 1;
     }
     
     int possibilities = 0;

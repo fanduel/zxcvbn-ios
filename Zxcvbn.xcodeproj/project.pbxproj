@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0F158761ECC5DB3005D78B7 /* frequency_lists.json in Resources */ = {isa = PBXBuildFile; fileRef = D80ECB9B1BDEAABE0055EF0A /* frequency_lists.json */; };
+		B0F158771ECC5DB8005D78B7 /* adjacency_graphs.json in Resources */ = {isa = PBXBuildFile; fileRef = D80ECB9A1BDEAABE0055EF0A /* adjacency_graphs.json */; };
 		D80ECB6C1BDEAA420055EF0A /* Zxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB731BDEAA420055EF0A /* Zxcvbn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */; };
 		D80ECB781BDEAA420055EF0A /* ZxcvbnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB771BDEAA420055EF0A /* ZxcvbnTests.m */; };
@@ -231,6 +233,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0F158761ECC5DB3005D78B7 /* frequency_lists.json in Resources */,
+				B0F158771ECC5DB8005D78B7 /* adjacency_graphs.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -31,6 +31,7 @@
 		B04FA2ED1EC6145100429DC3 /* DBSpatialMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2EB1EC6145100429DC3 /* DBSpatialMatch.m */; };
 		B04FA2F01EC9B96C00429DC3 /* DBDictionaryMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = B04FA2EE1EC9B96C00429DC3 /* DBDictionaryMatch.h */; };
 		B04FA2F11EC9B96C00429DC3 /* DBDictionaryMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B04FA2EF1EC9B96C00429DC3 /* DBDictionaryMatch.m */; };
+		B0C8F82D1ECCA9BA0024C26B /* DBMatching.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C8F82C1ECCA9BA0024C26B /* DBMatching.h */; };
 		D80ECB6C1BDEAA420055EF0A /* Zxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB731BDEAA420055EF0A /* Zxcvbn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */; };
 		D80ECB781BDEAA420055EF0A /* ZxcvbnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB771BDEAA420055EF0A /* ZxcvbnTests.m */; };
@@ -83,6 +84,7 @@
 		B04FA2EB1EC6145100429DC3 /* DBSpatialMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSpatialMatch.m; sourceTree = "<group>"; };
 		B04FA2EE1EC9B96C00429DC3 /* DBDictionaryMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDictionaryMatch.h; sourceTree = "<group>"; };
 		B04FA2EF1EC9B96C00429DC3 /* DBDictionaryMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDictionaryMatch.m; sourceTree = "<group>"; };
+		B0C8F82C1ECCA9BA0024C26B /* DBMatching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMatching.h; sourceTree = "<group>"; };
 		D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Zxcvbn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Zxcvbn.h; sourceTree = "<group>"; };
 		D80ECB6D1BDEAA420055EF0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				B04FA2C61EC4B2AE00429DC3 /* DBMatch */,
+				B0C8F82C1ECCA9BA0024C26B /* DBMatching.h */,
 				B04FA2AC1EC372E200429DC3 /* DBMatchResources.h */,
 				B04FA2AD1EC372E200429DC3 /* DBMatchResources.m */,
 			);
@@ -235,6 +238,7 @@
 				B04FA2831EC333D400429DC3 /* DBResult.h in Headers */,
 				B04FA2E41EC6088600429DC3 /* DBDateMatch.h in Headers */,
 				B04FA2EC1EC6145100429DC3 /* DBSpatialMatch.h in Headers */,
+				B0C8F82D1ECCA9BA0024C26B /* DBMatching.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

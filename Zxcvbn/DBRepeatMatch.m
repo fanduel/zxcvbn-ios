@@ -12,10 +12,9 @@
 
 @implementation DBRepeatMatch
 
-- (CGFloat)entropy
-{
-    float cardinality = [DBUtilities calcBruteForceCardinalityForPassword:self.token];
-    return lg(cardinality * [self.token length]);
+- (NSUInteger)guesses {
+    NSUInteger cardinality = [DBUtilities calcBruteForceCardinalityForPassword:self.token];
+    return cardinality * self.token.length;
 }
 
 @end

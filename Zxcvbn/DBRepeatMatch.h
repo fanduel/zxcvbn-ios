@@ -10,6 +10,6 @@
 
 @interface DBRepeatMatch : DBMatch
 
-@property (strong, nonatomic) NSString *repeatedChar;
+@property (strong, nonatomic) NSString *repeatedToken;
 
 @end

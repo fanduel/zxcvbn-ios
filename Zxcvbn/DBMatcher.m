@@ -373,7 +373,7 @@
                         match.i = i;
                         match.j = j - 1;
                         match.token = [password substringWithRange:NSMakeRange(i, j - i)];
-                        match.repeatedChar = [password substringWithRange:NSMakeRange(i, 1)];
+                        match.repeatedToken = [password substringWithRange:NSMakeRange(i, 1)];
                         [result addObject:match];
                     }
                     break;

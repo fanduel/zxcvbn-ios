@@ -23,6 +23,7 @@
     DBBruteForceMatch *match = [[DBBruteForceMatch alloc] init];
     match.token = password;
     match.i = 0;
+    match.j = password.length - 1;
     return [NSArray arrayWithObject:match];
 }
 

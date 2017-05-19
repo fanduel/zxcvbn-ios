@@ -47,10 +47,19 @@
 - (void)test_matchesForPassword_ProvidedPassword_SetsValueForiToZero {
     DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
 
-    NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"linjepir"];
+    NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"bujkwbeg"];
 
     DBBruteForceMatch *match = result.firstObject;
     XCTAssertEqual(0, match.i);
+}
+
+- (void)test_matchesForPassword_ProvidedPassword_SetsValueForjToIndexOfLastCharacterInProvidedPassword {
+    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
+    
+    NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"pvyqjecvis"];
+    
+    DBBruteForceMatch *match = result.firstObject;
+    XCTAssertEqual(9, match.j);
 }
 
 @end

@@ -26,5 +26,13 @@
     XCTAssertEqual(1, result.count);
 }
 
+- (void)test_matchesForPassword_ProvidedEmptyPassword_ReturnsZeroResults {
+    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@""];
+
+    XCTAssertNotNil(result);
+    XCTAssertEqual(0, result.count);
+}
 
 @end

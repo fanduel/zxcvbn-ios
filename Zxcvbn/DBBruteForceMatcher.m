@@ -17,6 +17,9 @@
 @implementation DBBruteForceMatcher
 
 - (NSArray<DBBruteForceMatch *> *)matchesForPassword:(NSString *)password {
+    if (password.length == 0) {
+        return [NSArray array];
+    }
     DBBruteForceMatch *match = [[DBBruteForceMatch alloc] init];
     return [NSArray arrayWithObject:match];
 }

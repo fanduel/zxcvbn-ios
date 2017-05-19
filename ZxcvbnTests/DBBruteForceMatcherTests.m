@@ -35,4 +35,13 @@
     XCTAssertEqual(0, result.count);
 }
 
+- (void)test_matchesForPassword_ProvidedPassword_SetsValueForTokenToProvidedPassword {
+    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
+
+    NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"linjepir"];
+
+    DBBruteForceMatch *match = result.firstObject;
+    XCTAssertEqual(@"linjepir", match.token);
+}
+
 @end

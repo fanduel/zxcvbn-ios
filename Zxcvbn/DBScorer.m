@@ -11,6 +11,7 @@
 #import "DBMatcher.h"
 #import "DBResult.h"
 #import "DBMatch.h"
+#import "DBBruteForceMatch.h"
 #import "DBMatchResources.h"
 #import "DBUtilities.h"
 
@@ -65,7 +66,7 @@
     // fill in the blanks between pattern matches with bruteforce "matches"
     // that way the match sequence fully covers the password: match1.j == match2.i - 1 for every adjacent match1, match2.
     DBMatch* (^makeBruteforceMatch)(NSUInteger i, NSUInteger j) = ^ DBMatch* (NSUInteger i, NSUInteger j) {
-        DBMatch *match = [[DBMatch alloc] init];
+        DBBruteForceMatch *match = [[DBBruteForceMatch alloc] init];
         match.pattern = @"bruteforce";
         match.i = i;
         match.j = j;

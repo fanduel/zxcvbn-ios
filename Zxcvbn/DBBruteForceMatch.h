@@ -12,4 +12,6 @@
 
 @interface DBBruteForceMatch : DBMatch
 
+@property (nonatomic, assign) NSUInteger cardinality;
+
 @end

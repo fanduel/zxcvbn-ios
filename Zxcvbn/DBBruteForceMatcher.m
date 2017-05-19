@@ -8,10 +8,17 @@
 
 #import "DBBruteForceMatcher.h"
 
+#import "DBBruteForceMatch.h"
+
+@interface DBBruteForceMatcher ()
+
+@end
+
 @implementation DBBruteForceMatcher
 
-- (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
-    return nil;
+- (NSArray<DBBruteForceMatch *> *)matchesForPassword:(NSString *)password {
+    DBBruteForceMatch *match = [[DBBruteForceMatch alloc] init];
+    return [NSArray arrayWithObject:match];
 }
 
 @end

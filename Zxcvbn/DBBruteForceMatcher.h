@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class DBBruteForceMatch;
+
 #import "DBMatching.h"
 
 @interface DBBruteForceMatcher : NSObject <DBMatching>
+
+- (nonnull NSArray<DBBruteForceMatch *> *)matchesForPassword:(nonnull NSString *)password;
 
 @end

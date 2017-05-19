@@ -14,6 +14,10 @@
 
 @interface DBBruteForceMatcher : NSObject <DBMatching>
 
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithCardinality:(NSUInteger)cardinality NS_DESIGNATED_INITIALIZER;
+
 - (nonnull NSArray<DBBruteForceMatch *> *)matchesForPassword:(nonnull NSString *)password;
 
 @end

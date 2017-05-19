@@ -19,7 +19,7 @@
 @implementation DBBruteForceMatcherTests
 
 - (void)test_matchesForPassword_ProvidedPassword_ReturnsSingleMatch {
-    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
+    DBBruteForceMatcher *sut = [self createMatcher];
 
     NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"avuinmef"];
 
@@ -27,7 +27,7 @@
 }
 
 - (void)test_matchesForPassword_ProvidedEmptyPassword_ReturnsZeroResults {
-    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
+    DBBruteForceMatcher *sut = [self createMatcher];
 
     NSArray<DBMatch *> *result = [sut matchesForPassword:@""];
 
@@ -36,7 +36,7 @@
 }
 
 - (void)test_matchesForPassword_ProvidedPassword_SetsValueForTokenToProvidedPassword {
-    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
+    DBBruteForceMatcher *sut = [self createMatcher];
 
     NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"linjepir"];
 
@@ -45,7 +45,7 @@
 }
 
 - (void)test_matchesForPassword_ProvidedPassword_SetsValueForiToZero {
-    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
+    DBBruteForceMatcher *sut = [self createMatcher];
 
     NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"bujkwbeg"];
 
@@ -54,12 +54,25 @@
 }
 
 - (void)test_matchesForPassword_ProvidedPassword_SetsValueForjToIndexOfLastCharacterInProvidedPassword {
-    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] init];
+    DBBruteForceMatcher *sut = [self createMatcher];
     
     NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"pvyqjecvis"];
     
     DBBruteForceMatch *match = result.firstObject;
     XCTAssertEqual(9, match.j);
+}
+
+- (void)test_matchesForPassword_ProvidedPassword_SetsValueForCardinalityToValueProvidedToInitializer {
+    DBBruteForceMatcher *sut = [[DBBruteForceMatcher alloc] initWithCardinality:26];
+
+    NSArray<DBBruteForceMatch *> *result = [sut matchesForPassword:@"jsudfg"];
+
+    DBBruteForceMatch *match = result.firstObject;
+    XCTAssertEqual(26, match.cardinality);
+}
+
+- (DBBruteForceMatcher *)createMatcher {
+    return [[DBBruteForceMatcher alloc] initWithCardinality:10];
 }
 
 @end

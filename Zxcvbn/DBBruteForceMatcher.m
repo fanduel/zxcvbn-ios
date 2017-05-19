@@ -12,9 +12,18 @@
 
 @interface DBBruteForceMatcher ()
 
+@property (nonatomic, assign) NSUInteger cardinality;
+
 @end
 
 @implementation DBBruteForceMatcher
+
+- (instancetype)initWithCardinality:(NSUInteger)cardinality {
+    if (self = [super init]) {
+        self.cardinality = cardinality;
+    }
+    return self;
+}
 
 - (NSArray<DBBruteForceMatch *> *)matchesForPassword:(NSString *)password {
     if (password.length == 0) {
@@ -24,6 +33,7 @@
     match.token = password;
     match.i = 0;
     match.j = password.length - 1;
+    match.cardinality = self.cardinality;
     return [NSArray arrayWithObject:match];
 }
 

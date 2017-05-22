@@ -8,6 +8,23 @@
 
 #import "DBAdjacentCharacterMap.h"
 
+@interface DBAdjacentCharacterMap ()
+
+@property (nonatomic) NSDictionary<NSString *,NSString *> *adjacentCharacters;
+
+@end
+
 @implementation DBAdjacentCharacterMap
+
+- (instancetype)initWithDictionary:(NSDictionary<NSString *, NSString *> *)adjacentCharacters {
+    if (self = [super init]) {
+        self.adjacentCharacters = adjacentCharacters;
+    }
+    return self;
+}
+
+- (BOOL)containsMapForCharacter:(unichar)character {
+    return [self.adjacentCharacters.allKeys containsObject:[NSString stringWithCharacters:&character length:1]];
+}
 
 @end

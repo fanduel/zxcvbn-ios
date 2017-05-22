@@ -37,6 +37,9 @@
 		B05996EE1ED330B6000120B3 /* DBAdjacentCharacterMap.h in Headers */ = {isa = PBXBuildFile; fileRef = B05996EC1ED330B6000120B3 /* DBAdjacentCharacterMap.h */; };
 		B05996EF1ED330B6000120B3 /* DBAdjacentCharacterMap.m in Sources */ = {isa = PBXBuildFile; fileRef = B05996ED1ED330B6000120B3 /* DBAdjacentCharacterMap.m */; };
 		B05996F11ED330CF000120B3 /* DBAdjacentCharacterMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B05996F01ED330CF000120B3 /* DBAdjacentCharacterMapTests.m */; };
+		B06D3C111ED3437B005C4F40 /* DBSpatialMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = B06D3C0F1ED3437B005C4F40 /* DBSpatialMatcher.h */; };
+		B06D3C121ED3437B005C4F40 /* DBSpatialMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B06D3C101ED3437B005C4F40 /* DBSpatialMatcher.m */; };
+		B06D3C141ED34545005C4F40 /* DBSpatialMatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B06D3C131ED34545005C4F40 /* DBSpatialMatcherTests.m */; };
 		B0C8F82D1ECCA9BA0024C26B /* DBMatching.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C8F82C1ECCA9BA0024C26B /* DBMatching.h */; };
 		B0C8F8561ECDDCD90024C26B /* DBRepeatMatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C8F8551ECDDCD90024C26B /* DBRepeatMatcherTests.m */; };
 		B0C8F8591ECDDD050024C26B /* DBRepeatMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C8F8571ECDDD050024C26B /* DBRepeatMatcher.h */; };
@@ -107,6 +110,9 @@
 		B05996EC1ED330B6000120B3 /* DBAdjacentCharacterMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAdjacentCharacterMap.h; sourceTree = "<group>"; };
 		B05996ED1ED330B6000120B3 /* DBAdjacentCharacterMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAdjacentCharacterMap.m; sourceTree = "<group>"; };
 		B05996F01ED330CF000120B3 /* DBAdjacentCharacterMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAdjacentCharacterMapTests.m; sourceTree = "<group>"; };
+		B06D3C0F1ED3437B005C4F40 /* DBSpatialMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSpatialMatcher.h; sourceTree = "<group>"; };
+		B06D3C101ED3437B005C4F40 /* DBSpatialMatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSpatialMatcher.m; sourceTree = "<group>"; };
+		B06D3C131ED34545005C4F40 /* DBSpatialMatcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSpatialMatcherTests.m; sourceTree = "<group>"; };
 		B0C8F82C1ECCA9BA0024C26B /* DBMatching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMatching.h; sourceTree = "<group>"; };
 		B0C8F8551ECDDCD90024C26B /* DBRepeatMatcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRepeatMatcherTests.m; sourceTree = "<group>"; };
 		B0C8F8571ECDDD050024C26B /* DBRepeatMatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRepeatMatcher.h; sourceTree = "<group>"; };
@@ -169,6 +175,8 @@
 				B0D645FD1ED2FC050029DDA8 /* DBRankedDictionary.m */,
 				B0C8F8571ECDDD050024C26B /* DBRepeatMatcher.h */,
 				B0C8F8581ECDDD050024C26B /* DBRepeatMatcher.m */,
+				B06D3C0F1ED3437B005C4F40 /* DBSpatialMatcher.h */,
+				B06D3C101ED3437B005C4F40 /* DBSpatialMatcher.m */,
 				B04FA2C61EC4B2AE00429DC3 /* DBMatch */,
 				B0C8F82C1ECCA9BA0024C26B /* DBMatching.h */,
 				B04FA2AC1EC372E200429DC3 /* DBMatchResources.h */,
@@ -208,8 +216,9 @@
 				B0C8F85F1ECEFAE60024C26B /* DBBruteForceMatcherTests.m */,
 				B0C8F8551ECDDCD90024C26B /* DBRepeatMatcherTests.m */,
 				B0D646001ED301640029DDA8 /* DBRankedDictionaryTests.m */,
-				B05996EA1ED30CEF000120B3 /* DBDictionaryMatcherTests.m */,
+				B06D3C131ED34545005C4F40 /* DBSpatialMatcherTests.m */,
 				B05996F01ED330CF000120B3 /* DBAdjacentCharacterMapTests.m */,
+				B05996EA1ED30CEF000120B3 /* DBDictionaryMatcherTests.m */,
 			);
 			name = DBMatcherTests;
 			sourceTree = "<group>";
@@ -281,6 +290,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B06D3C111ED3437B005C4F40 /* DBSpatialMatcher.h in Headers */,
 				B04FA2E01EC606D900429DC3 /* DBDigitsMatch.h in Headers */,
 				B0C8F8631ECF09550024C26B /* DBBruteForceMatch.h in Headers */,
 				B0D645FE1ED2FC050029DDA8 /* DBRankedDictionary.h in Headers */,
@@ -416,6 +426,7 @@
 				B04FA2DD1EC601BD00429DC3 /* DBSequenceMatch.m in Sources */,
 				B04FA2841EC333D400429DC3 /* DBResult.m in Sources */,
 				B04FA2D21EC4C0DC00429DC3 /* DBRepeatMatch.m in Sources */,
+				B06D3C121ED3437B005C4F40 /* DBSpatialMatcher.m in Sources */,
 				B05996EF1ED330B6000120B3 /* DBAdjacentCharacterMap.m in Sources */,
 				B0C8F85A1ECDDD050024C26B /* DBRepeatMatcher.m in Sources */,
 				D80ECB8F1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m in Sources */,
@@ -435,6 +446,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B06D3C141ED34545005C4F40 /* DBSpatialMatcherTests.m in Sources */,
 				B0D646011ED301640029DDA8 /* DBRankedDictionaryTests.m in Sources */,
 				D80ECB961BDEAA7D0055EF0A /* DBZxcvbn.m in Sources */,
 				B05996EB1ED30CEF000120B3 /* DBDictionaryMatcherTests.m in Sources */,

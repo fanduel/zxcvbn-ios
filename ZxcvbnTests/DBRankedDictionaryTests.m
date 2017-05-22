@@ -25,8 +25,30 @@
     XCTAssertEqual(name, result);
 }
 
+- (void)test_containsWord_WordProvidedToInitializer_ReturnsYES {
+    NSString *word = @"frobnicator";
+    DBRankedDictionary *sut = [self createRankedDictionaryWithOrderedWords:@[word]];
+
+    BOOL result = [sut containsWord:word];
+
+    XCTAssertTrue(result);
+}
+
+- (void)test_containsWord_WordNotProvidedToInitializer_ReturnsNO {
+    NSString *word = @"frobnicator";
+    DBRankedDictionary *sut = [self createRankedDictionaryWithOrderedWords:@[word]];
+
+    BOOL result = [sut containsWord:@"tessellation"];
+
+    XCTAssertFalse(result);
+}
+
 - (DBRankedDictionary *)createRankedDictionaryWithName:(NSString *)name {
-    return [[DBRankedDictionary alloc] initWithName:name];
+    return [[DBRankedDictionary alloc] initWithName:name orderedWords:@[]];
+}
+
+- (DBRankedDictionary *)createRankedDictionaryWithOrderedWords:(NSArray<NSString *> *)words {
+    return [[DBRankedDictionary alloc] initWithName:@"name" orderedWords:words];
 }
 
 @end

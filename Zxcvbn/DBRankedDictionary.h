@@ -14,6 +14,8 @@
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithName:(nonnull NSString *)name NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithName:(nonnull NSString *)name orderedWords:(nonnull NSArray<NSString *> *)words NS_DESIGNATED_INITIALIZER;
+
+- (BOOL)containsWord:(nonnull NSString *)word;
 
 @end

@@ -17,12 +17,11 @@
 @implementation DBRankedDictionaryTests
 
 - (void)test_name_Always_ReturnsValueProvidedToInitializer {
-    NSString *name = @"big words";
-    DBRankedDictionary *sut = [self createRankedDictionaryWithName:name];
+    DBRankedDictionary *sut = [self createRankedDictionaryWithName:@"big words"];
     
     NSString *result = sut.name;
     
-    XCTAssertEqual(name, result);
+    XCTAssertEqual(@"big words", result);
 }
 
 - (void)test_containsWord_WordProvidedToInitializer_ReturnsYES {
@@ -41,6 +40,15 @@
     BOOL result = [sut containsWord:@"tessellation"];
 
     XCTAssertFalse(result);
+}
+
+- (void)test_rankForWord_WordAtIndexInArrayOfProvidedWords_ReturnsValueEqualToIndexPlusOne {
+    NSArray<NSString *> *words = @[@"giblets", @"velodrome", @"reprobate"];
+    DBRankedDictionary *sut = [self createRankedDictionaryWithOrderedWords:words];
+    
+    NSUInteger result = [sut rankForWord:@"velodrome"];
+    
+    XCTAssertEqual(2, result);
 }
 
 - (DBRankedDictionary *)createRankedDictionaryWithName:(NSString *)name {

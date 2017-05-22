@@ -18,4 +18,6 @@
 
 - (BOOL)containsWord:(nonnull NSString *)word;
 
+- (NSUInteger)rankForWord:(nonnull NSString *)word;
+
 @end

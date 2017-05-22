@@ -29,4 +29,8 @@
     return [self.words containsObject:word];
 }
 
+- (NSUInteger)rankForWord:(NSString *)word {
+    return [self.words indexOfObject:word] + 1;
+}
+
 @end

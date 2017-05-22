@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class DBRankedDictionary;
+@class DBDictionaryMatch;
 
 #import "DBMatching.h"
 
@@ -17,5 +18,7 @@
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
 - (nonnull instancetype)initWithRankedDictionary:(nonnull DBRankedDictionary *)dictionary NS_DESIGNATED_INITIALIZER;
+
+- (nonnull NSArray<DBDictionaryMatch *> *)matchesForPassword:(nonnull NSString *)password;
 
 @end

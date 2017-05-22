@@ -13,7 +13,7 @@
 @property (strong, nonatomic) NSString *matchedWord;
 @property (strong, nonatomic) NSString *dictionaryName;
 @property (nonatomic, assign) BOOL reversed;
-@property (nonatomic, assign) int rank;
+@property (nonatomic, assign) NSUInteger rank;
 @property (nonatomic, assign) float baseEntropy;
 @property (nonatomic, assign) float upperCaseEntropy;
 @property (nonatomic, assign) BOOL l33t;

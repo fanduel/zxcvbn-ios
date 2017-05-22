@@ -16,4 +16,6 @@
 
 - (BOOL)containsMapForCharacter:(unichar)character;
 
+- (nonnull NSCharacterSet *)adjacentCharactersForCharacter:(unichar)character;
+
 @end

@@ -27,4 +27,9 @@
     return [self.adjacentCharacters.allKeys containsObject:[NSString stringWithCharacters:&character length:1]];
 }
 
+- (NSCharacterSet *)adjacentCharactersForCharacter:(unichar)character {
+    NSString *stringWithCharacters = [self.adjacentCharacters valueForKey:[NSString stringWithCharacters:&character length:1]];
+    return [NSCharacterSet characterSetWithCharactersInString:stringWithCharacters];
+}
+
 @end

@@ -32,6 +32,15 @@
     XCTAssertFalse(result);
 }
 
+- (void)test_adjacentCharactersForCharacter_CharacterMapInProvidedDictionary_ReturnsCharacterSetOfAdjacentCharacters {
+    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMap];
+
+    NSCharacterSet *result = [sut adjacentCharactersForCharacter:'j'];
+
+    NSCharacterSet *expectedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"uhkm"];
+    XCTAssertEqualObjects(expectedCharacterSet, result);
+}
+
 - (DBAdjacentCharacterMap *)createAdjacentCharacterMap {
     NSDictionary<NSString *, NSArray<NSString *> *> *adjacencyMap = @{
                                                                      @"f" : @"rdgv",

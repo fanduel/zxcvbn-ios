@@ -40,6 +40,9 @@
 		B0C8F8601ECEFAE60024C26B /* DBBruteForceMatcherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C8F85F1ECEFAE60024C26B /* DBBruteForceMatcherTests.m */; };
 		B0C8F8631ECF09550024C26B /* DBBruteForceMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = B0C8F8611ECF09550024C26B /* DBBruteForceMatch.h */; };
 		B0C8F8641ECF09550024C26B /* DBBruteForceMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B0C8F8621ECF09550024C26B /* DBBruteForceMatch.m */; };
+		B0D645FE1ED2FC050029DDA8 /* DBRankedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D645FC1ED2FC050029DDA8 /* DBRankedDictionary.h */; };
+		B0D645FF1ED2FC050029DDA8 /* DBRankedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D645FD1ED2FC050029DDA8 /* DBRankedDictionary.m */; };
+		B0D646011ED301640029DDA8 /* DBRankedDictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D646001ED301640029DDA8 /* DBRankedDictionaryTests.m */; };
 		D80ECB6C1BDEAA420055EF0A /* Zxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB731BDEAA420055EF0A /* Zxcvbn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */; };
 		D80ECB781BDEAA420055EF0A /* ZxcvbnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB771BDEAA420055EF0A /* ZxcvbnTests.m */; };
@@ -101,6 +104,9 @@
 		B0C8F85F1ECEFAE60024C26B /* DBBruteForceMatcherTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBBruteForceMatcherTests.m; sourceTree = "<group>"; };
 		B0C8F8611ECF09550024C26B /* DBBruteForceMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBBruteForceMatch.h; sourceTree = "<group>"; };
 		B0C8F8621ECF09550024C26B /* DBBruteForceMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBBruteForceMatch.m; sourceTree = "<group>"; };
+		B0D645FC1ED2FC050029DDA8 /* DBRankedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRankedDictionary.h; sourceTree = "<group>"; };
+		B0D645FD1ED2FC050029DDA8 /* DBRankedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRankedDictionary.m; sourceTree = "<group>"; };
+		B0D646001ED301640029DDA8 /* DBRankedDictionaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRankedDictionaryTests.m; sourceTree = "<group>"; };
 		D80ECB681BDEAA420055EF0A /* Zxcvbn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Zxcvbn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D80ECB6B1BDEAA420055EF0A /* Zxcvbn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Zxcvbn.h; sourceTree = "<group>"; };
 		D80ECB6D1BDEAA420055EF0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -143,6 +149,8 @@
 			children = (
 				B0C8F85B1ECEFA210024C26B /* DBBruteForceMatcher.h */,
 				B0C8F85C1ECEFA210024C26B /* DBBruteForceMatcher.m */,
+				B0D645FC1ED2FC050029DDA8 /* DBRankedDictionary.h */,
+				B0D645FD1ED2FC050029DDA8 /* DBRankedDictionary.m */,
 				B0C8F8571ECDDD050024C26B /* DBRepeatMatcher.h */,
 				B0C8F8581ECDDD050024C26B /* DBRepeatMatcher.m */,
 				B04FA2C61EC4B2AE00429DC3 /* DBMatch */,
@@ -183,6 +191,7 @@
 			children = (
 				B0C8F85F1ECEFAE60024C26B /* DBBruteForceMatcherTests.m */,
 				B0C8F8551ECDDCD90024C26B /* DBRepeatMatcherTests.m */,
+				B0D646001ED301640029DDA8 /* DBRankedDictionaryTests.m */,
 			);
 			name = DBMatcherTests;
 			sourceTree = "<group>";
@@ -256,6 +265,7 @@
 			files = (
 				B04FA2E01EC606D900429DC3 /* DBDigitsMatch.h in Headers */,
 				B0C8F8631ECF09550024C26B /* DBBruteForceMatch.h in Headers */,
+				B0D645FE1ED2FC050029DDA8 /* DBRankedDictionary.h in Headers */,
 				D80ECB6C1BDEAA420055EF0A /* Zxcvbn.h in Headers */,
 				B0C8F85D1ECEFA210024C26B /* DBBruteForceMatcher.h in Headers */,
 				B04FA2F01EC9B96C00429DC3 /* DBDictionaryMatch.h in Headers */,
@@ -379,6 +389,7 @@
 			files = (
 				B04FA2E51EC6088600429DC3 /* DBDateMatch.m in Sources */,
 				B04FA2E91EC60CC800429DC3 /* DBYearMatch.m in Sources */,
+				B0D645FF1ED2FC050029DDA8 /* DBRankedDictionary.m in Sources */,
 				B04FA2D61EC4C1FB00429DC3 /* DBUtilities.m in Sources */,
 				B0C8F85E1ECEFA210024C26B /* DBBruteForceMatcher.m in Sources */,
 				D80ECB921BDEAA7D0055EF0A /* DBScorer.m in Sources */,
@@ -402,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D646011ED301640029DDA8 /* DBRankedDictionaryTests.m in Sources */,
 				D80ECB961BDEAA7D0055EF0A /* DBZxcvbn.m in Sources */,
 				B0C8F8561ECDDCD90024C26B /* DBRepeatMatcherTests.m in Sources */,
 				D80ECB8D1BDEAA7D0055EF0A /* DBMatcher.m in Sources */,

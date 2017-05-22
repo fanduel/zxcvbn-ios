@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class DBRankedDictionary;
+
 #import "DBMatching.h"
 
 @interface DBDictionaryMatcher : NSObject <DBMatching>
+
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithRankedDictionary:(nonnull DBRankedDictionary *)dictionary NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -12,6 +12,8 @@
 
 @property (nonatomic, readonly, nonnull) NSString *name;
 
-- (nonnull instancetype)initWithName:(nonnull NSString *)name;
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithName:(nonnull NSString *)name NS_DESIGNATED_INITIALIZER;
 
 @end

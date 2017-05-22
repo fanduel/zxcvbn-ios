@@ -10,4 +10,8 @@
 
 @interface DBRankedDictionary : NSObject
 
+@property (nonatomic, readonly, nonnull) NSString *name;
+
+- (nonnull instancetype)initWithName:(nonnull NSString *)name;
+
 @end

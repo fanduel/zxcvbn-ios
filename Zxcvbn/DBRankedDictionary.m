@@ -8,6 +8,19 @@
 
 #import "DBRankedDictionary.h"
 
+@interface DBRankedDictionary ()
+
+@property (nonatomic, readwrite) NSString *name;
+
+@end
+
 @implementation DBRankedDictionary
+
+- (instancetype)initWithName:(NSString *)name {
+    if (self = [super init]) {
+        self.name = name;
+    }
+    return self;
+}
 
 @end

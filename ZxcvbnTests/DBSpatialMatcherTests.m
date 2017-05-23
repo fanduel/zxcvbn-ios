@@ -29,7 +29,7 @@
 - (void)test_matchesForPassword_PasswordNotFollowingSpatialPatternProvidedToInitializer_ReturnsZeroMatches {
     DBSpatialMatcher *sut = [self createSpatialMatcher];
 
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"fhg"];
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"fghfgh"];
 
     XCTAssertEqual(0, result.count);
 }
@@ -47,11 +47,31 @@
 }
 
 - (DBAdjacentCharacterMap *)createAdjacentCharacterMap {
-    NSDictionary<NSString *, NSArray<NSString *> *> *adjacencyMap = @{
-                                                                      @"f" : @"rdgv",
-                                                                      @"g" : @"tfhb",
-                                                                      @"h" : @"ygjn",
-                                                                      @"j" : @"uhkm"
+    NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *adjacencyMap = @{
+                                                                      @"f" : @{
+                                                                              @"r" : @(DBAdjacentCharacterDirectionUp),
+                                                                              @"d" : @(DBAdjacentCharacterDirectionLeft),
+                                                                              @"g" : @(DBAdjacentCharacterDirectionRight),
+                                                                              @"v" : @(DBAdjacentCharacterDirectionDown),
+                                                                              },
+                                                                      @"g" : @{
+                                                                              @"t" : @(DBAdjacentCharacterDirectionUp),
+                                                                              @"f" : @(DBAdjacentCharacterDirectionLeft),
+                                                                              @"h" : @(DBAdjacentCharacterDirectionRight),
+                                                                              @"b" : @(DBAdjacentCharacterDirectionDown),
+                                                                              },
+                                                                      @"h" : @{
+                                                                              @"y" : @(DBAdjacentCharacterDirectionUp),
+                                                                              @"g" : @(DBAdjacentCharacterDirectionLeft),
+                                                                              @"j" : @(DBAdjacentCharacterDirectionRight),
+                                                                              @"n" : @(DBAdjacentCharacterDirectionDown),
+                                                                              },
+                                                                      @"j" : @{
+                                                                              @"u" : @(DBAdjacentCharacterDirectionUp),
+                                                                              @"h" : @(DBAdjacentCharacterDirectionLeft),
+                                                                              @"k" : @(DBAdjacentCharacterDirectionRight),
+                                                                              @"m" : @(DBAdjacentCharacterDirectionDown),
+                                                                              },
                                                                       };
     return [[DBAdjacentCharacterMap alloc] initWithName:@"name" dictionary:adjacencyMap];
 }

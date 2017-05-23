@@ -17,11 +17,11 @@
 @implementation DBAdjacentCharacterMapTests
 
 - (void)test_name_Always_ReturnsValueProvidedToInitializer {
-    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMapWithName:@"fji"];
+    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMapWithName:@"fghj"];
 
     NSString *result = sut.name;
 
-    XCTAssertEqual(@"fji", result);
+    XCTAssertEqual(@"fghj", result);
 }
 
 - (void)test_containsMapForCharacter_CharacterMapInProvidedDictionary_ReturnsYES {
@@ -40,21 +40,49 @@
     XCTAssertFalse(result);
 }
 
-- (void)test_adjacentCharactersForCharacter_CharacterMapInProvidedDictionary_ReturnsCharacterSetOfAdjacentCharacters {
+- (void)test_isCharacterAdjacentToCharacter_ProvidedCharactersAreAdjacent_ReturnsYES {
     DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMap];
 
-    NSCharacterSet *result = [sut adjacentCharactersForCharacter:'j'];
+    BOOL result = [sut isCharacter:'f' adjacentToCharacter:'d'];
 
-    NSCharacterSet *expectedCharacterSet = [NSCharacterSet characterSetWithCharactersInString:@"uhkm"];
-    XCTAssertEqualObjects(expectedCharacterSet, result);
+    XCTAssertTrue(result);
+}
+
+- (void)test_isCharacterAdjacentToCharacter_ProvidedCharactersAreNotAdjacent_ReturnsNO {
+    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMap];
+
+    BOOL result = [sut isCharacter:'f' adjacentToCharacter:'h'];
+
+    XCTAssertFalse(result);
 }
 
 - (DBAdjacentCharacterMap *)createAdjacentCharacterMapWithName:(NSString *)name {
-    NSDictionary<NSString *, NSArray<NSString *> *> *adjacencyMap = @{
-                                                                      @"f" : @"rdgv",
-                                                                      @"j" : @"uhkm",
-                                                                      @"l" : @"ok;."
-                                                                      };
+    NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *adjacencyMap = @{
+                                                                                       @"f" : @{
+                                                                                               @"r" : @(DBAdjacentCharacterDirectionUp),
+                                                                                               @"d" : @(DBAdjacentCharacterDirectionLeft),
+                                                                                               @"g" : @(DBAdjacentCharacterDirectionRight),
+                                                                                               @"v" : @(DBAdjacentCharacterDirectionDown),
+                                                                                               },
+                                                                                       @"g" : @{
+                                                                                               @"t" : @(DBAdjacentCharacterDirectionUp),
+                                                                                               @"f" : @(DBAdjacentCharacterDirectionLeft),
+                                                                                               @"h" : @(DBAdjacentCharacterDirectionRight),
+                                                                                               @"b" : @(DBAdjacentCharacterDirectionDown),
+                                                                                               },
+                                                                                       @"h" : @{
+                                                                                               @"y" : @(DBAdjacentCharacterDirectionUp),
+                                                                                               @"g" : @(DBAdjacentCharacterDirectionLeft),
+                                                                                               @"j" : @(DBAdjacentCharacterDirectionRight),
+                                                                                               @"n" : @(DBAdjacentCharacterDirectionDown),
+                                                                                               },
+                                                                                       @"j" : @{
+                                                                                               @"u" : @(DBAdjacentCharacterDirectionUp),
+                                                                                               @"h" : @(DBAdjacentCharacterDirectionLeft),
+                                                                                               @"k" : @(DBAdjacentCharacterDirectionRight),
+                                                                                               @"m" : @(DBAdjacentCharacterDirectionDown),
+                                                                                               },
+                                                                                       };
     return [[DBAdjacentCharacterMap alloc] initWithName:(NSString *)name dictionary:adjacencyMap];
 }
 

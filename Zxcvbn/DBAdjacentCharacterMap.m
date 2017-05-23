@@ -11,13 +11,13 @@
 @interface DBAdjacentCharacterMap ()
 
 @property (nonatomic, readwrite) NSString *name;
-@property (nonatomic) NSDictionary<NSString *,NSString *> *adjacentCharacters;
+@property (nonatomic) NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *adjacentCharacters;
 
 @end
 
 @implementation DBAdjacentCharacterMap
 
-- (instancetype)initWithName:(NSString *)name dictionary:(NSDictionary<NSString *, NSString *> *)adjacentCharacters {
+- (instancetype)initWithName:(NSString *)name dictionary:(NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *)adjacentCharacters {
     if (self = [super init]) {
         self.name = name;
         self.adjacentCharacters = adjacentCharacters;
@@ -29,9 +29,9 @@
     return [self.adjacentCharacters.allKeys containsObject:[NSString stringWithCharacters:&character length:1]];
 }
 
-- (NSCharacterSet *)adjacentCharactersForCharacter:(unichar)character {
-    NSString *stringWithCharacters = [self.adjacentCharacters valueForKey:[NSString stringWithCharacters:&character length:1]];
-    return [NSCharacterSet characterSetWithCharactersInString:stringWithCharacters];
+- (BOOL)isCharacter:(unichar)first adjacentToCharacter:(unichar)second {
+    NSArray<NSString *> *stringWithCharacters = [[self.adjacentCharacters valueForKey:[NSString stringWithCharacters:&first length:1]] allKeys];
+    return [stringWithCharacters containsObject:[NSString stringWithCharacters:&second length:1]];
 }
 
 @end

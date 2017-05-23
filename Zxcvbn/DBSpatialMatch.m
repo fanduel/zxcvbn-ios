@@ -66,10 +66,10 @@
     }
     int possibilities = 0;
     NSUInteger L = [self.token length];
-    int t = self.turns;
+    NSUInteger t = self.turns;
     // estimate the number of possible patterns w/ length L or less with t turns or less.
-    for (int i = 2; i <= L; i++) {
-        int possibleTurns = MIN(t, i - 1);
+    for (NSUInteger i = 2; i <= L; i++) {
+        NSUInteger possibleTurns = MIN(t, i - 1);
         for (int j = 1; j <= possibleTurns; j++) {
             possibilities += binom(i - 1, j - 1) * s * pow(d, j);
         }

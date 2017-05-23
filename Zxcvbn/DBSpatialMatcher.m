@@ -31,6 +31,8 @@
         return @[];
     }
     unichar previousCharacter = [password characterAtIndex:0];
+    DBAdjacentCharacterDirection previousDirection = DBAdjacentCharacterDirectionNone;
+    NSUInteger turns = 0;
     for (NSUInteger i = 1; i < password.length; i++) {
         unichar character = [password characterAtIndex:i];
         if (![self.characterMap containsMapForCharacter:previousCharacter]) {
@@ -38,7 +40,12 @@
         } else if (![self.characterMap isCharacter:previousCharacter adjacentToCharacter:character]) {
             return @[];
         } else {
+            DBAdjacentCharacterDirection direction = [self.characterMap directionFromCharacter:previousCharacter toCharacter:character];
+            if (previousDirection != direction) {
+                turns++;
+            }
             previousCharacter = character;
+            previousDirection = direction;
         }
     }
     DBSpatialMatch *match = [[DBSpatialMatch alloc] init];
@@ -46,6 +53,7 @@
     match.i = 0;
     match.j = password.length - 1;
     match.graph = self.characterMap.name;
+    match.turns = turns;
     return @[match];
 }
 

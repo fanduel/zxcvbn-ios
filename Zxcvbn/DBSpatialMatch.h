@@ -11,7 +11,7 @@
 @interface DBSpatialMatch : DBMatch
 
 @property (strong, nonatomic) NSString *graph;
-@property (nonatomic, assign) int turns;
+@property (nonatomic, assign) NSUInteger turns;
 @property (nonatomic, assign) int shiftedCount;
 
 @end

@@ -79,6 +79,15 @@
     XCTAssertEqual(@"name", result.graph);
 }
 
+- (void)test_matchesForPassword_PasswordInDictionaryProvidedToInitializer_SetsTurnsToNumberOfTurnsInSequenceInReturnedMatch {
+    DBSpatialMatcher *sut = [self createSpatialMatcher];
+
+    NSArray<DBSpatialMatch *> *matches = [sut matchesForPassword:@"fghjhgfghjh"];
+
+    DBSpatialMatch *result = matches.firstObject;
+    XCTAssertEqual(4, result.turns);
+}
+
 - (DBSpatialMatcher *)createSpatialMatcher {
     return [[DBSpatialMatcher alloc] initWithAdjacentCharacterMap:[self createAdjacentCharacterMap]];
 }

@@ -10,9 +10,11 @@
 
 @interface DBAdjacentCharacterMap : NSObject
 
+@property (nonatomic, readonly, nonnull) NSString *name;
+
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithDictionary:(nonnull NSDictionary<NSString *, NSArray<NSString *> *> *)adjacentCharacters NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithName:(nonnull NSString *)name dictionary:(nonnull NSDictionary<NSString *, NSArray<NSString *> *> *)adjacentCharacters NS_DESIGNATED_INITIALIZER;
 
 - (BOOL)containsMapForCharacter:(unichar)character;
 

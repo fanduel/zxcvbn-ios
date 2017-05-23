@@ -53,7 +53,7 @@
                                                                       @"h" : @"ygjn",
                                                                       @"j" : @"uhkm"
                                                                       };
-    return [[DBAdjacentCharacterMap alloc] initWithDictionary:adjacencyMap];
+    return [[DBAdjacentCharacterMap alloc] initWithName:@"name" dictionary:adjacencyMap];
 }
 
 @end

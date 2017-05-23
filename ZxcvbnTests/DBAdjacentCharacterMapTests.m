@@ -16,6 +16,14 @@
 
 @implementation DBAdjacentCharacterMapTests
 
+- (void)test_name_Always_ReturnsValueProvidedToInitializer {
+    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMapWithName:@"fji"];
+
+    NSString *result = sut.name;
+
+    XCTAssertEqual(@"fji", result);
+}
+
 - (void)test_containsMapForCharacter_CharacterMapInProvidedDictionary_ReturnsYES {
     DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMap];
 
@@ -41,13 +49,17 @@
     XCTAssertEqualObjects(expectedCharacterSet, result);
 }
 
-- (DBAdjacentCharacterMap *)createAdjacentCharacterMap {
+- (DBAdjacentCharacterMap *)createAdjacentCharacterMapWithName:(NSString *)name {
     NSDictionary<NSString *, NSArray<NSString *> *> *adjacencyMap = @{
-                                                                     @"f" : @"rdgv",
-                                                                     @"j" : @"uhkm",
-                                                                     @"l" : @"ok;."
-                                                                     };
-    return [[DBAdjacentCharacterMap alloc] initWithDictionary:adjacencyMap];
+                                                                      @"f" : @"rdgv",
+                                                                      @"j" : @"uhkm",
+                                                                      @"l" : @"ok;."
+                                                                      };
+    return [[DBAdjacentCharacterMap alloc] initWithName:(NSString *)name dictionary:adjacencyMap];
+}
+
+- (DBAdjacentCharacterMap *)createAdjacentCharacterMap {
+    return [self createAdjacentCharacterMapWithName:@"name"];
 }
 
 @end

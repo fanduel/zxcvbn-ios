@@ -10,14 +10,16 @@
 
 @interface DBAdjacentCharacterMap ()
 
+@property (nonatomic, readwrite) NSString *name;
 @property (nonatomic) NSDictionary<NSString *,NSString *> *adjacentCharacters;
 
 @end
 
 @implementation DBAdjacentCharacterMap
 
-- (instancetype)initWithDictionary:(NSDictionary<NSString *, NSString *> *)adjacentCharacters {
+- (instancetype)initWithName:(NSString *)name dictionary:(NSDictionary<NSString *, NSString *> *)adjacentCharacters {
     if (self = [super init]) {
+        self.name = name;
         self.adjacentCharacters = adjacentCharacters;
     }
     return self;

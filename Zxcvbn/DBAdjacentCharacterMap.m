@@ -34,4 +34,9 @@
     return [stringWithCharacters containsObject:[NSString stringWithCharacters:&second length:1]];
 }
 
+- (DBAdjacentCharacterDirection)directionFromCharacter:(unichar)first toCharacter:(unichar)second {
+    NSDictionary<NSString *, NSNumber *> *directions = [self.adjacentCharacters valueForKey:[NSString stringWithCharacters:&first length:1]];
+    return (DBAdjacentCharacterDirection)[directions valueForKey:[NSString stringWithCharacters:&second length:1] ].unsignedIntegerValue;
+}
+
 @end

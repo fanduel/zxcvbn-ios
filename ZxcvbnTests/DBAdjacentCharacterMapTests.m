@@ -56,6 +56,38 @@
     XCTAssertFalse(result);
 }
 
+- (void)test_directionFromCharacterToCharacter_DirectionIsUp_ReturnsDBAdjacentCharacterDirectionUp {
+    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMap];
+
+    DBAdjacentCharacterDirection result = [sut directionFromCharacter:'f' toCharacter:'r'];
+
+    XCTAssertEqual(DBAdjacentCharacterDirectionUp, result);
+}
+
+- (void)test_directionFromCharacterToCharacter_DirectionIsLeft_ReturnsDBAdjacentCharacterDirectionLeft {
+    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMap];
+
+    DBAdjacentCharacterDirection result = [sut directionFromCharacter:'f' toCharacter:'d'];
+
+    XCTAssertEqual(DBAdjacentCharacterDirectionLeft, result);
+}
+
+- (void)test_directionFromCharacterToCharacter_DirectionIsRight_ReturnsDBAdjacentCharacterDirectionRight {
+    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMap];
+
+    DBAdjacentCharacterDirection result = [sut directionFromCharacter:'f' toCharacter:'g'];
+
+    XCTAssertEqual(DBAdjacentCharacterDirectionRight, result);
+}
+
+- (void)test_directionFromCharacterToCharacter_DirectionIsDown_ReturnsDBAdjacentCharacterDirectionDown {
+    DBAdjacentCharacterMap *sut = [self createAdjacentCharacterMap];
+
+    DBAdjacentCharacterDirection result = [sut directionFromCharacter:'f' toCharacter:'v'];
+
+    XCTAssertEqual(DBAdjacentCharacterDirectionDown, result);
+}
+
 - (DBAdjacentCharacterMap *)createAdjacentCharacterMapWithName:(NSString *)name {
     NSDictionary<NSString *, NSDictionary<NSString *, NSNumber *> *> *adjacencyMap = @{
                                                                                        @"f" : @{

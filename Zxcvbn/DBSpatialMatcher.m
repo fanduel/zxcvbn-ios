@@ -41,7 +41,12 @@
             previousCharacter = character;
         }
     }
-    return @[[[DBMatch alloc] init]];
+    DBSpatialMatch *match = [[DBSpatialMatch alloc] init];
+    match.token = password;
+    match.i = 0;
+    match.j = password.length - 1;
+    match.graph = self.characterMap.name;
+    return @[match];
 }
 
 @end

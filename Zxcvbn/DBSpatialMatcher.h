@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class DBAdjacentCharacterMap;
+@class DBSpatialMatch;
 
 #import "DBMatching.h"
 
@@ -17,5 +18,7 @@
 - (instancetype)init NS_UNAVAILABLE;
 
 - (instancetype)initWithAdjacentCharacterMap:(DBAdjacentCharacterMap *)characterMap NS_DESIGNATED_INITIALIZER;
+
+- (NSArray<DBSpatialMatch *> *)matchesForPassword:(NSString *)password;
 
 @end

@@ -10,4 +10,10 @@
 
 @interface DBSubstitutionMap : NSObject
 
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithSubstitutions:(nonnull NSDictionary<NSString *, NSString *> *)substitutions NS_DESIGNATED_INITIALIZER;
+
+- (BOOL)isSubstituteCharacter:(nonnull NSString *)character;
+
 @end

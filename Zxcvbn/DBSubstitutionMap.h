@@ -16,4 +16,6 @@
 
 - (BOOL)isSubstituteCharacter:(nonnull NSString *)character;
 
+- (nonnull NSArray<NSString *> *)charactersSubstitutedByCharacter:(nonnull NSString *)character;
+
 @end

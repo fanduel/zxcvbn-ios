@@ -10,7 +10,7 @@
 
 @interface DBSubstitutionMap ()
 
-@property (nonatomic) NSDictionary<NSString *, NSString *> *substitutions;
+@property (nonatomic) NSMutableDictionary<NSString *, NSString *> *substitutions;
 
 @end
 
@@ -18,22 +18,31 @@
 
 - (instancetype)initWithSubstitutions:(NSDictionary<NSString *, NSString *> *)substitutions {
     if (self = [super init]) {
-        self.substitutions = substitutions;
+        self.substitutions = [[NSMutableDictionary alloc] init];
+        [substitutions enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSString * _Nonnull value, BOOL * _Nonnull stop) {
+            [self.substitutions setValue:value forKey:[self keyForCharacter:key]];
+        }];
     }
     return self;
 }
 
 - (BOOL)isSubstituteCharacter:(nonnull NSString *)character {
-    return [self.substitutions.allKeys containsObject:character];
+    NSString *key = [self keyForCharacter:character];
+    return [self.substitutions.allKeys containsObject:key];
 }
 
 - (NSArray<NSString *> *)charactersSubstitutedByCharacter:(NSString *)character {
     NSMutableArray<NSString *> *result = [[NSMutableArray alloc] init];
-    NSString *substitutions = [self.substitutions valueForKey:character];
-    [substitutions enumerateSubstringsInRange:NSMakeRange(0, substitutions.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
-        [result addObject:substring];
+    NSString *key = [self keyForCharacter:character];
+    NSString *substitutedCharacters = [self.substitutions valueForKey:key];
+    [substitutedCharacters enumerateSubstringsInRange:NSMakeRange(0, substitutedCharacters.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable substitutedCharacter, NSRange substringRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+        [result addObject:substitutedCharacter];
     }];
     return result;
+}
+
+- (NSString *)keyForCharacter:(NSString *)character {
+    return [NSString stringWithFormat:@"key%@", character];
 }
 
 @end

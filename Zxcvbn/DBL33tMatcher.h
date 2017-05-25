@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class DBSubstitutionMap;
+@class DBL33tMatch;
+
 #import "DBMatching.h"
 
 @interface DBL33tMatcher : NSObject <DBMatching>
+
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithSubstitutionMap:(nonnull DBSubstitutionMap *)substitutionMap matcher:(nonnull id<DBMatching>)matcher NS_DESIGNATED_INITIALIZER;
 
 @end

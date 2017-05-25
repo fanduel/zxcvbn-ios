@@ -33,14 +33,31 @@
 }
 
 - (void)test_matchesForPassword_SingleL33tSubstitution_ProvidesPasswordWithoutL33tSubstitutionToMatcher {
+    DBMatch *expectedInnerMatch = [[DBMatch alloc] init];
+    DBFakeMatcher *stubMatcher = [self createFakeMatcher];
+    stubMatcher.matchesForPasswords = @{ @"password" : @[expectedInnerMatch] };
+    DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"p@ssword"];
+
+    DBL33tMatch *match = (DBL33tMatch *)result.firstObject;
+    XCTAssertEqualObjects(expectedInnerMatch, match.innerMatch);
+}
+
+- (void)test_matchesForPassword_SingleL33tSubstitutions_SetsSubstitutionsOnMatch {
     DBMatch *innerMatch = [[DBMatch alloc] init];
     DBFakeMatcher *stubMatcher = [self createFakeMatcher];
     stubMatcher.matchesForPasswords = @{ @"password" : @[innerMatch] };
     DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
 
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"p@ssword"];
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"p@ssw0rd"];
 
-    XCTAssertEqualObjects(innerMatch, ((DBL33tMatch *)result.firstObject).innerMatch);
+    DBL33tMatch *match = (DBL33tMatch *)result.firstObject;
+    NSDictionary<NSString *, NSString *> *expectedSubstitutions = @{
+                                                                    @"a" : @"@",
+                                                                    @"o" : @"0"
+                                                                    };
+    XCTAssertEqualObjects(expectedSubstitutions, (match.substitutions));
 }
 
 - (DBFakeMatcher *)createFakeMatcher {
@@ -53,7 +70,17 @@
 
 - (DBSubstitutionMap *)createSubstitutionMap {
     return [[DBSubstitutionMap alloc] initWithSubstitutions:@{
-                                                              @"@" : @"a"
+                                                              @"@" : @"a",
+                                                              @"0" : @"o",
+                                                              @"7" : @"lt"
                                                               }];
+}
+
+- (DBMatch *)createMatchForPassword:(NSString *)password {
+    DBMatch *match = [[DBMatch alloc] init];
+    match.token = password;
+    match.i = 0;
+    match.j = password.length - 1;
+    return match;
 }
 @end

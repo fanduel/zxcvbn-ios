@@ -27,32 +27,37 @@
 }
 
 - (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
-    NSLog([NSString stringWithFormat:@"Password: %@", password]);
     __block NSArray<DBMatch *> *result = [[NSMutableArray alloc] init];
-    __block NSMutableArray<NSString *> *substitutedPasswords = [[NSMutableArray alloc] init];
-    NSRange range = NSMakeRange(0, password.length);
-    [password enumerateSubstringsInRange:range options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable character, NSRange characterRange, NSRange enclosingRange, BOOL * _Nonnull stopPasswordEnumaration) {
+    __block BOOL hasSubstitutedCharacters = NO;
+    NSRange passwordRange = NSMakeRange(0, password.length);
+    [password enumerateSubstringsInRange:passwordRange options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable character, NSRange characterRange, NSRange enclosingRange, BOOL * _Nonnull stopPasswordEnumaration) {
         if ([self.substitutionMap isSubstituteCharacter:character]) {
             NSArray<NSString *> *substitutedCharacters = [self.substitutionMap charactersSubstitutedByCharacter:character];
             [substitutedCharacters enumerateObjectsUsingBlock:^(NSString * _Nonnull substitutedCharacter, NSUInteger idx, BOOL * _Nonnull stop) {
+                hasSubstitutedCharacters = YES;
                 NSString *substitutedPassword = [password stringByReplacingCharactersInRange:characterRange withString:substitutedCharacter];
-                [substitutedPasswords addObject:substitutedPassword];
+                NSArray<DBMatch *> *innerMatches = [self matchesForPassword:substitutedPassword];
+                [innerMatches enumerateObjectsUsingBlock:^(DBMatch * _Nonnull innerMatch, NSUInteger idx, BOOL * _Nonnull stop) {
+                    DBL33tSubstitution *substitition = [[DBL33tSubstitution alloc] init];
+                    substitition.originalCharacrer = character;
+                    substitition.substitutedCharacrer = substitutedCharacter;
+                    substitition.characterIndex = characterRange.location;
+                    DBL33tMatch *l33tMatch;
+                    if (![innerMatch isKindOfClass:DBL33tMatch.class]) {
+                        l33tMatch = [[DBL33tMatch alloc] init];
+                        l33tMatch.substitutions = @[];
+                        l33tMatch.innerMatch = innerMatch;
+                    } else {
+                        l33tMatch = (DBL33tMatch *)innerMatch;
+                    }
+                    l33tMatch.substitutions = [l33tMatch.substitutions arrayByAddingObject:substitition];
+                    result = [result arrayByAddingObject:l33tMatch];
+                }];
             }];
             *stopPasswordEnumaration = YES;
-            DBMatch *innerMatch = [self matchesForPassword:substitutedPasswords.firstObject].firstObject;
-            DBL33tMatch *l33tMatch;
-            if (![innerMatch isKindOfClass:DBL33tMatch.class]) {
-                l33tMatch = [[DBL33tMatch alloc] init];
-                l33tMatch.substitutions = [[NSMutableDictionary alloc] init];
-                l33tMatch.innerMatch = innerMatch;
-            } else {
-                l33tMatch = (DBL33tMatch *)innerMatch;
-            }
-            [l33tMatch.substitutions setValue:character forKey:substitutedCharacters.firstObject];
-            result = @[l33tMatch];
         }
     }];
-    if (substitutedPasswords.count == 0) {
+    if (!hasSubstitutedCharacters) {
         NSArray<DBMatch *> *innerMatches = [self.matcher matchesForPassword:password];
         result = innerMatches;
     }

@@ -11,7 +11,6 @@
 @implementation DBFakeMatcher
 
 - (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
-    NSArray<DBMatch *> *result;
     if (self.matchesForPasswords && self.matchesForPasswords[password]) {
         return self.matchesForPasswords[password];
     } else if (self.matchesForAnyPassword) {

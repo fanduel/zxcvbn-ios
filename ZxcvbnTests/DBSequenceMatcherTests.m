@@ -42,6 +42,14 @@
     XCTAssertEqual(0, result.count);
 }
 
+- (void)test_matchesForPassword_PasswordIsSequenceThatSkipsCharacters_ReturnsMatch {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"8642"];
+
+    XCTAssertEqual(1, result.count);
+}
+
 - (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsTokenToPasswordOnReturnedMatch {
     DBSequenceMatcher *sut = [self createSequenceMatcher];
 
@@ -76,6 +84,24 @@
 
     DBSequenceMatch *match = result[0];
     XCTAssertEqual(@"upper", match.sequenceName);
+}
+
+- (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsAscendingToTrueForAscendingSequenceOnReturnedMatch {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBSequenceMatch *> *result = [sut matchesForPassword:@"adgj"];
+
+    DBSequenceMatch *match = result[0];
+    XCTAssertTrue(match.ascending);
+}
+
+- (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsAscendingToFalseForDescendingSequenceOnReturnedMatch {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBSequenceMatch *> *result = [sut matchesForPassword:@"wusqom"];
+
+    DBSequenceMatch *match = result[0];
+    XCTAssertFalse(match.ascending);
 }
 
 - (DBSequenceMatcher *)createSequenceMatcher {

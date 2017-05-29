@@ -10,6 +10,8 @@
 
 #import "DBSequenceMatcher.h"
 
+#import "DBSequenceMatch.h"
+
 @interface DBSequenceMatcherTests : XCTestCase
 
 @end
@@ -38,6 +40,42 @@
     NSArray<DBMatch *> *result = [sut matchesForPassword:@"0"];
 
     XCTAssertEqual(0, result.count);
+}
+
+- (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsTokenToPasswordOnReturnedMatch {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"ghij"];
+
+    DBMatch *match = result[0];
+    XCTAssertEqual(@"ghij", match.token);
+}
+
+- (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsiToZeroOnReturnedMatch {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"ghij"];
+
+    DBMatch *match = result[0];
+    XCTAssertEqual(0, match.i);
+}
+
+- (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsjToIndexOfLastCharacterOfPasswordOnReturnedMatch {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"DEFGH"];
+
+    DBMatch *match = result[0];
+    XCTAssertEqual(4, match.j);
+}
+
+- (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsSequenceNameToNameOfMatchedSequenceOnReturnedMatch {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBSequenceMatch *> *result = [sut matchesForPassword:@"GHIJK"];
+
+    DBSequenceMatch *match = result[0];
+    XCTAssertEqual(@"upper", match.sequenceName);
 }
 
 - (DBSequenceMatcher *)createSequenceMatcher {

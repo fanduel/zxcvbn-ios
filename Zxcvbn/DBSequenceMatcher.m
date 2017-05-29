@@ -8,7 +8,7 @@
 
 #import "DBSequenceMatcher.h"
 
-#import "DBMatch.h"
+#import "DBSequenceMatch.h"
 
 @interface DBSequenceMatcher ()
 
@@ -32,7 +32,12 @@
     NSMutableArray<DBMatch *> *result = [[NSMutableArray alloc] init];
     [self.sequences enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull name, NSString * _Nonnull sequence, BOOL * _Nonnull stop) {
         if ([sequence containsString:password]) {
-            [result addObject:[[DBMatch alloc] init]];
+            DBSequenceMatch *match = [[DBSequenceMatch alloc] init];
+            match.token = password;
+            match.i = 0;
+            match.j = password.length - 1;
+            match.sequenceName = name;
+            [result addObject:match];
         }
     }];
     return result;

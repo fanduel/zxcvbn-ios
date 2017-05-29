@@ -6,7 +6,7 @@
 //  Copyright © 2017 Dropbox. All rights reserved.
 //
 
-#import <Zxcvbn/Zxcvbn.h>
+#import "DBMatch.h"
 
 @interface DBSequenceMatch : DBMatch
 

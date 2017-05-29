@@ -94,6 +94,15 @@
     XCTAssertEqual(@"upper", match.sequenceName);
 }
 
+- (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsSequenceSpaceToNumberOfCharactersInMatchedSequenceOnReturnedMatch {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBSequenceMatch *> *result = [sut matchesForPassword:@"4567"];
+
+    DBSequenceMatch *match = result[0];
+    XCTAssertEqual(11, match.sequenceSpace);
+}
+
 - (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsAscendingToTrueForAscendingSequenceOnReturnedMatch {
     DBSequenceMatcher *sut = [self createSequenceMatcher];
 

@@ -67,6 +67,7 @@
             match.i = 0;
             match.j = password.length - 1;
             match.sequenceName = name;
+            match.sequenceSpace = sequence.length;
             match.ascending = (delta > 0);
             [result addObject:match];
         }

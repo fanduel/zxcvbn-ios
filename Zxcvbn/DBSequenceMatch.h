@@ -11,7 +11,7 @@
 @interface DBSequenceMatch : DBMatch
 
 @property (strong, nonatomic) NSString *sequenceName;
-@property (nonatomic, assign) int sequenceSpace;
+@property (nonatomic, assign) NSUInteger sequenceSpace;
 @property (nonatomic, assign) BOOL ascending;
 
 @end

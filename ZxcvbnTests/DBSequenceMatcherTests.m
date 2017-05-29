@@ -50,6 +50,14 @@
     XCTAssertEqual(1, result.count);
 }
 
+- (void)test_matchesForPassword_PasswordIsSequenceOfOneRepeatingCharacter_ReturnsEmptyArray {
+    DBSequenceMatcher *sut = [self createSequenceMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"aa"];
+
+    XCTAssertEqual(0, result.count);
+}
+
 - (void)test_matchesForPassword_PasswordMatchesProvidedSequence_SetsTokenToPasswordOnReturnedMatch {
     DBSequenceMatcher *sut = [self createSequenceMatcher];
 

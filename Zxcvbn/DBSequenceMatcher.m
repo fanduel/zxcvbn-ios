@@ -48,6 +48,10 @@
             } else if (isSecondCharacter) {
                 isSecondCharacter = NO;
                 delta = currentSequenceIndex - previousSequenceIndex;
+                if (delta == 0) {
+                    isSequence = NO;
+                    *stop = YES;
+                }
             } else {
                 NSInteger currentDelta = currentSequenceIndex - previousSequenceIndex;
                 if (currentDelta != delta) {

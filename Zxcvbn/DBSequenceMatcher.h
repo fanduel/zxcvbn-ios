@@ -12,4 +12,7 @@
 
 @interface DBSequenceMatcher : NSObject <DBMatching>
 
+- (nonnull instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)initWithSequences:(nonnull NSDictionary<NSString *, NSString *> *)sequences NS_DESIGNATED_INITIALIZER;
+
 @end

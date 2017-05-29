@@ -10,9 +10,9 @@
 
 @interface DBDateMatch : DBMatch
 
-@property (nonatomic, assign) int day;
-@property (nonatomic, assign) int month;
-@property (nonatomic, assign) int year;
+@property (nonatomic, assign) NSInteger day;
+@property (nonatomic, assign) NSInteger month;
+@property (nonatomic, assign) NSInteger year;
 @property (strong, nonatomic) NSString *separator;
 
 @end

@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class DBDateMatch;
+
 #import "DBMatching.h"
 
 @interface DBDateMatcher : NSObject <DBMatching>
+
+- (nonnull NSArray<DBDateMatch *> *)matchesForPassword:(nonnull NSString *)password;
 
 @end

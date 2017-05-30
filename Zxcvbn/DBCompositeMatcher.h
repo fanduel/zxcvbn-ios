@@ -12,4 +12,8 @@
 
 @interface DBCompositeMatcher : NSObject <DBMatching>
 
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithMatchers:(nonnull NSArray<id<DBMatching>> *)matchers NS_DESIGNATED_INITIALIZER;
+
 @end

@@ -8,10 +8,29 @@
 
 #import "DBCompositeMatcher.h"
 
+#import "DBMatch.h"
+
+@interface DBCompositeMatcher ()
+
+@property (nonatomic) NSArray<id<DBMatching>> *matchers;
+
+@end
+
 @implementation DBCompositeMatcher
 
+- (instancetype)initWithMatchers:(NSArray<id<DBMatching>> *)matchers {
+    if (self = [super init]) {
+        self.matchers = matchers;
+    }
+    return self;
+}
+
 - (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
-    return @[];
+    NSMutableArray<DBMatch *> *result = [[NSMutableArray alloc] init];
+    [self.matchers enumerateObjectsUsingBlock:^(id<DBMatching>  _Nonnull matcher, NSUInteger idx, BOOL * _Nonnull stop) {
+        [result addObjectsFromArray:[matcher matchesForPassword:password]];
+    }];
+    return result;
 }
 
 @end

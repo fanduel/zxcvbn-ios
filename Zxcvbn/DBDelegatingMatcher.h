@@ -12,4 +12,6 @@
 
 @interface DBDelegatingMatcher : NSObject <DBMatching>
 
+@property (nullable, nonatomic, weak) id<DBMatching> delegate;
+
 @end

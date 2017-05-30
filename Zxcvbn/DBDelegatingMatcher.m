@@ -10,4 +10,12 @@
 
 @implementation DBDelegatingMatcher
 
+- (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
+    if (self.delegate) {
+        return [self.delegate matchesForPassword:password];
+    } else {
+        return @[];
+    }
+}
+
 @end

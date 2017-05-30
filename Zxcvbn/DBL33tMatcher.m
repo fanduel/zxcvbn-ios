@@ -32,27 +32,31 @@
     NSRange passwordRange = NSMakeRange(0, password.length);
     [password enumerateSubstringsInRange:passwordRange options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable character, NSRange characterRange, NSRange enclosingRange, BOOL * _Nonnull stopPasswordEnumaration) {
         if ([self.substitutionMap isSubstituteCharacter:character]) {
+            hasSubstitutedCharacters = YES;
             NSArray<NSString *> *substitutedCharacters = [self.substitutionMap charactersSubstitutedByCharacter:character];
             [substitutedCharacters enumerateObjectsUsingBlock:^(NSString * _Nonnull substitutedCharacter, NSUInteger idx, BOOL * _Nonnull stop) {
-                hasSubstitutedCharacters = YES;
                 NSString *substitutedPassword = [password stringByReplacingCharactersInRange:characterRange withString:substitutedCharacter];
+                __block NSMutableArray<DBMatch *> *nonL33tInnerMatches = [[NSMutableArray alloc] init];
+                DBL33tSubstitution *substitition = [[DBL33tSubstitution alloc] init];
+                substitition.originalCharacrer = character;
+                substitition.substitutedCharacrer = substitutedCharacter;
+                substitition.characterIndex = characterRange.location;
                 NSArray<DBMatch *> *innerMatches = [self matchesForPassword:substitutedPassword];
                 [innerMatches enumerateObjectsUsingBlock:^(DBMatch * _Nonnull innerMatch, NSUInteger idx, BOOL * _Nonnull stop) {
-                    DBL33tSubstitution *substitition = [[DBL33tSubstitution alloc] init];
-                    substitition.originalCharacrer = character;
-                    substitition.substitutedCharacrer = substitutedCharacter;
-                    substitition.characterIndex = characterRange.location;
-                    DBL33tMatch *l33tMatch;
                     if (![innerMatch isKindOfClass:DBL33tMatch.class]) {
-                        l33tMatch = [[DBL33tMatch alloc] init];
-                        l33tMatch.substitutions = @[];
-                        l33tMatch.innerMatch = innerMatch;
-                    } else {
-                        l33tMatch = (DBL33tMatch *)innerMatch;
+                        [nonL33tInnerMatches addObject:innerMatch];
+                        return;
                     }
+                    DBL33tMatch *l33tMatch = (DBL33tMatch *)innerMatch;
                     l33tMatch.substitutions = [l33tMatch.substitutions arrayByAddingObject:substitition];
                     result = [result arrayByAddingObject:l33tMatch];
                 }];
+                if (nonL33tInnerMatches.count > 0) {
+                    DBL33tMatch *l33tMatch = [[DBL33tMatch alloc] init];
+                    l33tMatch.substitutions = @[substitition];
+                    l33tMatch.innerMatches = nonL33tInnerMatches;
+                    result = [result arrayByAddingObject:l33tMatch];
+                }
             }];
             *stopPasswordEnumaration = YES;
         }

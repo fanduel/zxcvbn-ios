@@ -20,6 +20,6 @@
 
 @interface DBL33tMatch : DBMatch
 
-@property (nonatomic) DBMatch *innerMatch;
+@property (nonatomic) NSArray<DBMatch *> *innerMatches;
 @property (nonatomic) NSArray<DBL33tSubstitution *> *substitutions;
 @end

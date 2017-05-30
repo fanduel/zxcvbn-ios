@@ -33,15 +33,18 @@
 }
 
 - (void)test_matchesForPassword_SingleL33tSubstitution_ProvidesPasswordWithoutL33tSubstitutionToMatcher {
-    DBMatch *expectedInnerMatch = [[DBMatch alloc] init];
+    NSArray<DBMatch *> *expectedInnerMatches = @[
+                                                 [[DBMatch alloc] init],
+                                                 [[DBMatch alloc] init]
+                                                 ];
     DBFakeMatcher *stubMatcher = [self createFakeMatcher];
-    stubMatcher.matchesForPasswords = @{ @"password" : @[expectedInnerMatch] };
+    stubMatcher.matchesForPasswords = @{ @"password" : expectedInnerMatches };
     DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
 
     NSArray<DBMatch *> *result = [sut matchesForPassword:@"p@ssword"];
 
     DBL33tMatch *match = (DBL33tMatch *)result.firstObject;
-    XCTAssertEqualObjects(expectedInnerMatch, match.innerMatch);
+    XCTAssertEqualObjects(expectedInnerMatches, match.innerMatches);
 }
 
 - (void)test_matchesForPassword_SingleL33tSubstitutions_SetsCorrectNumberOfSubstitutionsOnMatch {

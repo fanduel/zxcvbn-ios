@@ -12,4 +12,8 @@
 
 @interface DBMatcherCache : NSObject <DBMatching>
 
+- (nonnull instancetype)init NS_UNAVAILABLE;
+
+- (nonnull instancetype)initWithMatcher:(nonnull id<DBMatching>)matcher cache:(NSCache *)cache NS_DESIGNATED_INITIALIZER;
+
 @end

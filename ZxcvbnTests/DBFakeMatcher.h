@@ -14,6 +14,8 @@
 
 @property (nullable, nonatomic) NSDictionary<NSString *, NSArray<DBMatch *> *> *matchesForPasswords;
 @property (nullable, nonatomic) NSArray<DBMatch *> *matchesForAnyPassword;
-@property (nullable, nonatomic, readonly) NSString *passwordSpy;
+@property (nonnull, nonatomic, readonly) NSArray<NSString *> *matchesForPasswordCalledWithPasswords;
+
+- (BOOL)didCallMatchesForPassword:(nonnull NSString *)password;
 
 @end

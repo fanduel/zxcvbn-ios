@@ -122,6 +122,10 @@
     [self assertPassword:@"31/12/50" matchesDateWithYear:2050 month:12 day:31 separator:@"/"];
 }
 
+- (void)test_matchesForPassword_TwoDigitValueForYearInDateWithSeparatorWithSingleUniqueMatch_ReturnsSingleMatch {
+    [self assertPassword:@"12/12/12" matchesDateWithYear:2012 month:12 day:12 separator:@"/"];
+}
+
 - (void)test_matchesForPassword_DateWithSeparatorWithMultiplePossibleMatches_ReturnsAllMatches {
     DBDateMatcher *sut = [self createDateMatcher];
 

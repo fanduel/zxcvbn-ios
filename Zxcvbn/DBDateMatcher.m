@@ -68,7 +68,8 @@
         NSString *first = [date substringWithRange:[result rangeAtIndex:1]];
         NSString *second = [date substringWithRange:[result rangeAtIndex:3]];
         NSString *third = [date substringWithRange:[result rangeAtIndex:5]];
-        [matches addObjectsFromArray:[self matchesForFirst:first second:second third:third separator:firstSeparator]];
+        NSArray<DBDateMatch *> *newMatches = [self matchesForFirst:first second:second third:third separator:firstSeparator];
+        [self addNewMatchesFromMatches:newMatches toExistingMatches:matches];
     }];
     return matches;
 }

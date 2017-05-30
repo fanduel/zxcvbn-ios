@@ -1,5 +1,5 @@
 //
-//  DBMatcherCache.h
+//  DBCachingMatcher.h
 //  Zxcvbn
 //
 //  Created by Steven King on 17/05/2017.
@@ -10,7 +10,7 @@
 
 #import "DBMatching.h"
 
-@interface DBMatcherCache : NSObject <DBMatching>
+@interface DBCachingMatcher : NSObject <DBMatching>
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 

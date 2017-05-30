@@ -1,5 +1,5 @@
 //
-//  DBMatcherCacheTests.m
+//  DBCachingMatcherTests.m
 //  Zxcvbn
 //
 //  Created by Steven King on 30/05/2017.
@@ -8,19 +8,19 @@
 
 #import <XCTest/XCTest.h>
 
-#import "DBMatcherCache.h"
+#import "DBCachingMatcher.h"
 
 #import "DBFakeMatcher.h"
 
-@interface DBMatcherCacheTests : XCTestCase
+@interface DBCachingMatcherTests : XCTestCase
 
 @end
 
-@implementation DBMatcherCacheTests
+@implementation DBCachingMatcherTests
 
 - (void)test_matchesForPassword_MatchesNotPreviouslyCalculatedForPassword_ObtainsMatchesFromProvidedMatcher {
     DBFakeMatcher *mockMatcher = [self createFakeMatcher];
-    DBMatcherCache *sut = [self createMatcherCacheWithMatcher:mockMatcher];
+    DBCachingMatcher *sut = [self createMatcherCacheWithMatcher:mockMatcher];
 
     [sut matchesForPassword:@"password"];
 
@@ -29,7 +29,7 @@
 
 - (void)test_matchesForPassword_MatchesPreviouslyCalculatedForPassword_DoesNotRepeatedlyObtainMatchesFromProvidedMatcher {
     DBFakeMatcher *mockMatcher = [self createFakeMatcher];
-    DBMatcherCache *sut = [self createMatcherCacheWithMatcher:mockMatcher];
+    DBCachingMatcher *sut = [self createMatcherCacheWithMatcher:mockMatcher];
     [sut matchesForPassword:@"password"];
 
     [sut matchesForPassword:@"password"];
@@ -39,7 +39,7 @@
 
 - (void)test_matchesForPassword_TheSamePasswordTwice_ReturnsTheSameMatch {
     DBFakeMatcher *mockMatcher = [self createFakeMatcher];
-    DBMatcherCache *sut = [self createMatcherCacheWithMatcher:mockMatcher];
+    DBCachingMatcher *sut = [self createMatcherCacheWithMatcher:mockMatcher];
 
     NSArray<DBMatch *> *firstResult = [sut matchesForPassword:@"password"];
     NSArray<DBMatch *> *secondResult = [sut matchesForPassword:@"password"];
@@ -49,7 +49,7 @@
 
 - (void)test_matchesForPassword_ReceivesMultiplePasswords_ObtainsEachPasswordOnceFromProvidedMatcher {
     DBFakeMatcher *mockMatcher = [self createFakeMatcher];
-    DBMatcherCache *sut = [self createMatcherCacheWithMatcher:mockMatcher];
+    DBCachingMatcher *sut = [self createMatcherCacheWithMatcher:mockMatcher];
 
     [sut matchesForPassword:@"first"];
     [sut matchesForPassword:@"second"];
@@ -69,9 +69,9 @@
     return [[DBFakeMatcher alloc] init];
 }
 
-- (DBMatcherCache *)createMatcherCacheWithMatcher:(id<DBMatching>)matcher {
+- (DBCachingMatcher *)createMatcherCacheWithMatcher:(id<DBMatching>)matcher {
     NSCache *cache = [[NSCache alloc] init];
-    return [[DBMatcherCache alloc] initWithMatcher:matcher cache:cache];
+    return [[DBCachingMatcher alloc] initWithMatcher:matcher cache:cache];
 }
 
 @end

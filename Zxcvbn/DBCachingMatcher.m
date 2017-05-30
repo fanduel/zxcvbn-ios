@@ -1,23 +1,23 @@
 //
-//  DBMatcherCache.m
+//  DBCachingMatcher.m
 //  Zxcvbn
 //
 //  Created by Steven King on 17/05/2017.
 //  Copyright © 2017 Dropbox. All rights reserved.
 //
 
-#import "DBMatcherCache.h"
+#import "DBCachingMatcher.h"
 
 #import "DBMatch.h"
 
-@interface DBMatcherCache ()
+@interface DBCachingMatcher ()
 
 @property (nonatomic) id<DBMatching> matcher;
 @property (nonatomic) NSCache *cache;
 
 @end
 
-@implementation DBMatcherCache
+@implementation DBCachingMatcher
 
 - (instancetype)initWithMatcher:(id<DBMatching>)matcher cache:(NSCache *)cache {
     if (self = [super init]) {

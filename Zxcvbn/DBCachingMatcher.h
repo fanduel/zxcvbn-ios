@@ -14,6 +14,6 @@
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
-- (nonnull instancetype)initWithMatcher:(nonnull id<DBMatching>)matcher cache:(NSCache *)cache NS_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithMatcher:(nonnull id<DBMatching>)matcher cache:(nonnull NSCache *)cache NS_DESIGNATED_INITIALIZER;
 
 @end

@@ -48,7 +48,8 @@
                 NSString *first = [date substringWithRange:NSMakeRange(0, secondIndex)];
                 NSString *second = [date substringWithRange:NSMakeRange(secondIndex, thirdIndex - secondIndex)];
                 NSString *third = [date substringWithRange:NSMakeRange(thirdIndex, date.length - thirdIndex)];
-                [matches addObjectsFromArray:[self matchesForFirst:first second:second third:third separator:@""]];
+                NSArray<DBDateMatch *> *newMatches = [self matchesForFirst:first second:second third:third separator:@""];
+                [self addNewMatchesFromMatches:newMatches toExistingMatches:matches];
             }
         }
     }];
@@ -70,6 +71,14 @@
         [matches addObjectsFromArray:[self matchesForFirst:first second:second third:third separator:firstSeparator]];
     }];
     return matches;
+}
+
+- (void)addNewMatchesFromMatches:(NSArray<DBDateMatch *> *)newMatches toExistingMatches:(NSMutableArray<DBDateMatch *> *)existingMatches {
+    [newMatches enumerateObjectsUsingBlock:^(DBDateMatch * _Nonnull newMatch, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (![existingMatches containsObject:newMatch]) {
+            [existingMatches addObject:newMatch];
+        }
+    }];
 }
 
 - (NSArray<DBDateMatch *> *)matchesForFirst:(NSString *)first second:(NSString *)second third:(NSString *)third separator:(NSString *)separator {

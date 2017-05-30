@@ -29,4 +29,21 @@ static int kNumDays = 31;
     return result;
 }
 
+- (BOOL)isEqual:(id)object {
+    if (self == object) {
+        return YES;
+    }
+    if (![object isKindOfClass:DBDateMatch.class]) {
+        return NO;
+    }
+    return [self isEqualToDBDateMatch:(DBDateMatch *)object];
+}
+
+- (BOOL)isEqualToDBDateMatch:(DBDateMatch *)other {
+    return self.year == other.year
+        && self.month == other.month
+        && self.day == other.day
+        && [self.separator isEqualToString:other.separator];
+}
+
 @end

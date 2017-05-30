@@ -39,15 +39,15 @@
         if (![firstSeparator isEqualToString:secondSeparator]) {
             return;
         }
-        NSInteger first = [[password substringWithRange:[result rangeAtIndex:1]] integerValue];
-        NSInteger second = [[password substringWithRange:[result rangeAtIndex:3]] integerValue];
-        NSInteger third = [[password substringWithRange:[result rangeAtIndex:5]] integerValue];
+        NSString *first = [password substringWithRange:[result rangeAtIndex:1]];
+        NSString *second = [password substringWithRange:[result rangeAtIndex:3]];
+        NSString *third = [password substringWithRange:[result rangeAtIndex:5]];
         [matches addObjectsFromArray:[self matchesForFirst:first second:second third:third separator:firstSeparator]];
     }];
     return matches;
 }
 
-- (NSArray<DBDateMatch *> *)matchesForFirst:(NSInteger)first second:(NSInteger)second third:(NSInteger)third separator:(NSString *)separator {
+- (NSArray<DBDateMatch *> *)matchesForFirst:(NSString *)first second:(NSString *)second third:(NSString *)third separator:(NSString *)separator {
     NSMutableArray *matches = [[NSMutableArray alloc] init];
     [matches addObjectsFromArray:[self matchesForYear:first month:second day:third separator:separator]];
     [matches addObjectsFromArray:[self matchesForYear:third month:second day:first separator:separator]];
@@ -55,13 +55,13 @@
     return matches;
 }
 
-- (NSArray<DBDateMatch *> *)matchesForYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day separator:(NSString *)separator {
-    NSInteger expandedYear = [self expandYearValue:year];
-    if ([self isValidDayValue:day] && [self isValidMonthValue:month] && [self isValidYearValue:expandedYear]) {
+- (NSArray<DBDateMatch *> *)matchesForYear:(NSString *)year month:(NSString *)month day:(NSString *)day separator:(NSString *)separator {
+    if ([self isValidDay:day] && [self isValidMonth:month] && [self isValidYear:year]) {
+        NSInteger expandedYear = [self expandYearValue:year.integerValue];
         DBDateMatch *match = [[DBDateMatch alloc] init];
         match.year = expandedYear;
-        match.month = month;
-        match.day = day;
+        match.month = month.integerValue;
+        match.day = day.integerValue;
         match.separator = separator;
         return @[match];
     } else {
@@ -79,15 +79,27 @@
     }
 }
 
-- (BOOL)isValidDayValue:(NSInteger)value {
+- (BOOL)isValidDay:(NSString *)day {
+    if (day.length > 2) {
+        return NO;
+    }
+    NSInteger value = day.integerValue;
     return value >= 1 && value <= 31;
 }
 
-- (BOOL)isValidMonthValue:(NSInteger)value {
+- (BOOL)isValidMonth:(NSString *)month {
+    if (month.length > 2) {
+        return NO;
+    }
+    NSInteger value = month.integerValue;
     return value >= 1 && value <= 12;
 }
 
-- (BOOL)isValidYearValue:(NSInteger)value {
+- (BOOL)isValidYear:(NSString *)year {
+    if (year.length != 2 && year.length != 4) {
+        return NO;
+    }
+    NSInteger value = [self expandYearValue:year.integerValue];
     return value >= 1000 && value <= 2050;
 }
 

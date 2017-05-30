@@ -122,15 +122,15 @@
     [self assertPassword:@"31/12/50" matchesDateWithYear:2050 month:12 day:31 separator:@"/"];
 }
 
-- (void)test_matchesForPassword_MultiplePossibleMatches_ReturnsAllMatches {
+- (void)test_matchesForPassword_DateWithSeparatorWithMultiplePossibleMatches_ReturnsAllMatches {
     DBDateMatcher *sut = [self createDateMatcher];
 
-    NSArray<DBDateMatch *> *result = [sut matchesForPassword:@"1/2/3"];
+    NSArray<DBDateMatch *> *result = [sut matchesForPassword:@"11/12/13"];
 
     XCTAssertEqual(3, result.count);
-    [self assertMatch:result[0] matchesDateWithYear:2001 month:2 day:3 separator:@"/"];
-    [self assertMatch:result[1] matchesDateWithYear:2003 month:2 day:1 separator:@"/"];
-    [self assertMatch:result[2] matchesDateWithYear:2003 month:1 day:2 separator:@"/"];
+    [self assertMatch:result[0] matchesDateWithYear:2011 month:12 day:13 separator:@"/"];
+    [self assertMatch:result[1] matchesDateWithYear:2013 month:12 day:11 separator:@"/"];
+    [self assertMatch:result[2] matchesDateWithYear:2013 month:11 day:12 separator:@"/"];
 }
 
 - (void)assertPassword:(NSString *)password matchesDateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day separator:(NSString *)separator {

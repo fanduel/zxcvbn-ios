@@ -12,6 +12,7 @@
 
 @interface DBDateMatcher ()
 
+@property (nonatomic) NSRegularExpression *dateWithoutSeparatorsRegularExpression;
 @property (nonatomic) NSRegularExpression *dateWithSeparatorsRegularExpression;
 @property (nonatomic) NSString *datePattern;
 
@@ -21,6 +22,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        self.dateWithoutSeparatorsRegularExpression = [NSRegularExpression regularExpressionWithPattern:@"^\\d{4,8}$" options:0 error:nil];
         NSString *oneOrTwoDigits = @"(\\d{1,2})";
         NSString *oneOrTwoOrFourDigits = @"(\\d{1,2}|\\d{4})";
         NSString *separator = @"(\\\\|\\/|\\.|-|_| )";
@@ -32,16 +34,39 @@
 
 - (NSArray<DBDateMatch *> *)matchesForPassword:(NSString *)password {
     __block NSMutableArray<DBDateMatch *> *matches = [[NSMutableArray alloc] init];
-    NSRange range = NSMakeRange(0, password.length);
-    [self.dateWithSeparatorsRegularExpression enumerateMatchesInString:password options:0 range:range usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
-        NSString *firstSeparator = [password substringWithRange:[result rangeAtIndex:2]];
-        NSString *secondSeparator = [password substringWithRange:[result rangeAtIndex:4]];
+    [matches addObjectsFromArray:[self matchesForDateWithSeparators:password]];
+    [matches addObjectsFromArray:[self matchesForDateWithoutSeparators:password]];
+    return matches;
+}
+
+- (NSArray<DBDateMatch *> *)matchesForDateWithoutSeparators:(NSString *)date {
+    __block NSMutableArray<DBDateMatch *> *matches = [[NSMutableArray alloc] init];
+    NSRange range = NSMakeRange(0, date.length);
+    [self.dateWithoutSeparatorsRegularExpression enumerateMatchesInString:date options:0 range:range usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+        for (NSUInteger secondIndex = 1; secondIndex < date.length - 1; secondIndex++) {
+            for (NSUInteger thirdIndex = secondIndex + 1; thirdIndex < date.length; thirdIndex++) {
+                NSString *first = [date substringWithRange:NSMakeRange(0, secondIndex)];
+                NSString *second = [date substringWithRange:NSMakeRange(secondIndex, thirdIndex - secondIndex)];
+                NSString *third = [date substringWithRange:NSMakeRange(thirdIndex, date.length - thirdIndex)];
+                [matches addObjectsFromArray:[self matchesForFirst:first second:second third:third separator:@""]];
+            }
+        }
+    }];
+    return matches;
+}
+
+- (NSArray<DBDateMatch *> *)matchesForDateWithSeparators:(NSString *)date {
+    __block NSMutableArray<DBDateMatch *> *matches = [[NSMutableArray alloc] init];
+    NSRange range = NSMakeRange(0, date.length);
+    [self.dateWithSeparatorsRegularExpression enumerateMatchesInString:date options:0 range:range usingBlock:^(NSTextCheckingResult * _Nullable result, NSMatchingFlags flags, BOOL * _Nonnull stop) {
+        NSString *firstSeparator = [date substringWithRange:[result rangeAtIndex:2]];
+        NSString *secondSeparator = [date substringWithRange:[result rangeAtIndex:4]];
         if (![firstSeparator isEqualToString:secondSeparator]) {
             return;
         }
-        NSString *first = [password substringWithRange:[result rangeAtIndex:1]];
-        NSString *second = [password substringWithRange:[result rangeAtIndex:3]];
-        NSString *third = [password substringWithRange:[result rangeAtIndex:5]];
+        NSString *first = [date substringWithRange:[result rangeAtIndex:1]];
+        NSString *second = [date substringWithRange:[result rangeAtIndex:3]];
+        NSString *third = [date substringWithRange:[result rangeAtIndex:5]];
         [matches addObjectsFromArray:[self matchesForFirst:first second:second third:third separator:firstSeparator]];
     }];
     return matches;

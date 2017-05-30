@@ -133,6 +133,17 @@
     [self assertMatch:result[2] matchesDateWithYear:2013 month:11 day:12 separator:@"/"];
 }
 
+- (void)test_matchesForPassword_DateWithoutSeparatorWithFourDigits_ReturnsAllMatches {
+    DBDateMatcher *sut = [self createDateMatcher];
+
+    NSArray<DBDateMatch *> *result = [sut matchesForPassword:@"1234"];
+
+    XCTAssertEqual(3, result.count);
+    [self assertMatch:result[0] matchesDateWithYear:2034 month:2 day:1 separator:@""];
+    [self assertMatch:result[1] matchesDateWithYear:2034 month:1 day:2 separator:@""];
+    [self assertMatch:result[2] matchesDateWithYear:2012 month:3 day:4 separator:@""];
+}
+
 - (void)assertPassword:(NSString *)password matchesDateWithYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day separator:(NSString *)separator {
     DBDateMatcher *sut = [self createDateMatcher];
 

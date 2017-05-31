@@ -100,6 +100,36 @@
     [self assertFragmentMatches:match.fragmentMatches containsMatchesWithTokens:@[@"pa", @"s"]];
 }
 
+- (void)test_matchesForPassword_ProvidedFourCharacterPassword_ReturnsSevenPermutationMatchsPlusMatchesForPasswordFromProvidedMatcher {
+    DBPermutationMatcher *sut = [self createPermutationMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"pass"];
+
+    XCTAssertEqual(8, result.count);
+    XCTAssertTrue([result[0] isKindOfClass:DBPermutationMatch.class]);
+    XCTAssertTrue([result[1] isKindOfClass:DBPermutationMatch.class]);
+    XCTAssertTrue([result[2] isKindOfClass:DBPermutationMatch.class]);
+    XCTAssertTrue([result[3] isKindOfClass:DBPermutationMatch.class]);
+    XCTAssertTrue([result[4] isKindOfClass:DBPermutationMatch.class]);
+    XCTAssertTrue([result[5] isKindOfClass:DBPermutationMatch.class]);
+    XCTAssertTrue([result[6] isKindOfClass:DBPermutationMatch.class]);
+    XCTAssertEqual(@"pass", result[7].token);
+}
+
+- (void)test_matchesForPassword_ProvidedFourCharacterPassword_AllPermutationMatchesContainsCorrectFragmentMatches {
+    DBPermutationMatcher *sut = [self createPermutationMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"pass"];
+
+    [self assertFragmentMatches:[(DBPermutationMatch *)result[0] fragmentMatches] containsMatchesWithTokens:@[@"p", @"a", @"s", @"s"]];
+    [self assertFragmentMatches:[(DBPermutationMatch *)result[1] fragmentMatches] containsMatchesWithTokens:@[@"p", @"a", @"ss"]];
+    [self assertFragmentMatches:[(DBPermutationMatch *)result[2] fragmentMatches] containsMatchesWithTokens:@[@"p", @"as", @"s"]];
+    [self assertFragmentMatches:[(DBPermutationMatch *)result[3] fragmentMatches] containsMatchesWithTokens:@[@"p", @"ass"]];
+    [self assertFragmentMatches:[(DBPermutationMatch *)result[4] fragmentMatches] containsMatchesWithTokens:@[@"pa", @"s", @"s"]];
+    [self assertFragmentMatches:[(DBPermutationMatch *)result[5] fragmentMatches] containsMatchesWithTokens:@[@"pa", @"ss"]];
+    [self assertFragmentMatches:[(DBPermutationMatch *)result[6] fragmentMatches] containsMatchesWithTokens:@[@"pas", @"s"]];
+}
+
 - (void)assertFragmentMatches:(NSArray<NSArray<DBMatch *> *> *)fragmentMatches containsMatchesWithTokens:(NSArray<NSString *> *)tokens {
     XCTAssertEqual(tokens.count, fragmentMatches.count);
     [tokens enumerateObjectsUsingBlock:^(NSString * _Nonnull token, NSUInteger idx, BOOL * _Nonnull stop) {

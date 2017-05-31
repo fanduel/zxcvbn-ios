@@ -20,9 +20,7 @@
 @implementation DBPermutationMatcherTests
 
 - (void)test_matchesForPassword_ProvidedZeroCharacterPassword_ReturnsZeroMatches {
-    DBMatch *rejectedMatch = [[DBMatch alloc] init];
     DBFakeMatcher *stubMatcher = [self createFakeMatcher];
-    [stubMatcher setMatchesForPasswords:@{ @"" : @[rejectedMatch] }];
     DBPermutationMatcher *sut = [self createPermutationMatcherWithMatcher:stubMatcher];
 
     NSArray<DBMatch *> *result = [sut matchesForPassword:@""];

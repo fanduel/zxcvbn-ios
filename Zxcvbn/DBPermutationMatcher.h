@@ -12,4 +12,8 @@
 
 @interface DBPermutationMatcher : NSObject <DBMatching>
 
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithMatcher:(id<DBMatching>)matcher NS_DESIGNATED_INITIALIZER;
+
 @end

@@ -12,6 +12,13 @@
 
 @implementation DBMatch
 
+- (instancetype)initWithToken:(NSString *)token {
+    if (self = [super init]) {
+        self.token = token;
+    }
+    return self;
+}
+
 - (CGFloat)guessesLog10 {
     return self.guesses <= 1 ? 0.0 : log10f(self.guesses);
 }

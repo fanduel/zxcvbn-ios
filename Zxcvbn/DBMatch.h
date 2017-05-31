@@ -19,4 +19,6 @@
 @property (nonatomic, assign) NSUInteger guesses;
 @property (nonatomic, assign) CGFloat guessesLog10;
 
+- (instancetype)initWithToken:(NSString *)token;
+
 @end

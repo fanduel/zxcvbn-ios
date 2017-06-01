@@ -10,6 +10,8 @@
 
 @interface DBRepeatMatch : DBMatch
 
+@property (strong, nonatomic) NSArray<DBMatch *> *innerMatches;
 @property (strong, nonatomic) NSString *repeatedToken;
+@property (assign) NSUInteger repeatCount;
 
 @end

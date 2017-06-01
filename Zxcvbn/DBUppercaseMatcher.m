@@ -33,7 +33,14 @@
         match.token = password;
         match.i = 0;
         match.j = password.length - 1;
+        match.substitutedCharacters = @[];
         match.innerMatches = [self.matcher matchesForPassword:password.lowercaseString];
+        NSRange range = NSMakeRange(0, password.length);
+        [password enumerateSubstringsInRange:range options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString * _Nullable character, NSRange characterRange, NSRange enclosingRange, BOOL * _Nonnull stop) {
+            if (character != character.lowercaseString) {
+                match.substitutedCharacters = [match.substitutedCharacters arrayByAddingObject:character];
+            }
+        }];
         return @[match];
     }
 }

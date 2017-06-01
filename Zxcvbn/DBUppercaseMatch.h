@@ -13,5 +13,6 @@
 @interface DBUppercaseMatch : DBMatch
 
 @property (nonatomic) NSArray<DBMatch *> *innerMatches;
+@property (nonatomic) NSArray<NSString *> *substitutedCharacters;
 
 @end

@@ -92,6 +92,22 @@
     XCTAssertEqualObjects(expectedInnerMatches, match.innerMatches);
 }
 
+- (void)test_matchesForPassword_PasswordContainsUppercaseCharacters_SetsValueForSubstitutedCharactersOnMatchToUppercaseCharactersInPassword {
+    NSArray<DBMatch *> *innerMatches = @[
+                                                 [[DBMatch alloc] init],
+                                                 [[DBMatch alloc] init]
+                                                 ];
+    DBFakeMatcher *stubMatcher = [self createFakeMatcher];
+    stubMatcher.matchesForPasswords = @{ @"password" : innerMatches };
+    DBUppercaseMatcher *sut = [self createUppercaseMatcherWithMatcher:stubMatcher];
+
+    NSArray<DBMatch *> *result = [sut matchesForPassword:@"passwOrD"];
+
+    DBUppercaseMatch *match = (DBUppercaseMatch *)result[0];
+    NSArray<NSString *> *expectedSubstitutions = @[@"O", @"D"];
+    XCTAssertEqualObjects(expectedSubstitutions, match.substitutedCharacters);
+}
+
 - (DBFakeMatcher *)createFakeMatcher {
     return [[DBFakeMatcher alloc] init];
 }

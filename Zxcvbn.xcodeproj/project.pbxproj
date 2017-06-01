@@ -96,16 +96,12 @@
 		D80ECB781BDEAA420055EF0A /* ZxcvbnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB771BDEAA420055EF0A /* ZxcvbnTests.m */; };
 		D80ECB8B1BDEAA7D0055EF0A /* DBMatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB821BDEAA7D0055EF0A /* DBMatcher.h */; };
 		D80ECB8C1BDEAA7D0055EF0A /* DBMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB831BDEAA7D0055EF0A /* DBMatcher.m */; };
-		D80ECB8D1BDEAA7D0055EF0A /* DBMatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB831BDEAA7D0055EF0A /* DBMatcher.m */; };
 		D80ECB8E1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB841BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB8F1BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB851BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m */; };
-		D80ECB901BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB851BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m */; };
 		D80ECB911BDEAA7D0055EF0A /* DBScorer.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB861BDEAA7D0055EF0A /* DBScorer.h */; };
 		D80ECB921BDEAA7D0055EF0A /* DBScorer.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB871BDEAA7D0055EF0A /* DBScorer.m */; };
-		D80ECB931BDEAA7D0055EF0A /* DBScorer.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB871BDEAA7D0055EF0A /* DBScorer.m */; };
 		D80ECB941BDEAA7D0055EF0A /* DBZxcvbn.h in Headers */ = {isa = PBXBuildFile; fileRef = D80ECB881BDEAA7D0055EF0A /* DBZxcvbn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D80ECB951BDEAA7D0055EF0A /* DBZxcvbn.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB891BDEAA7D0055EF0A /* DBZxcvbn.m */; };
-		D80ECB961BDEAA7D0055EF0A /* DBZxcvbn.m in Sources */ = {isa = PBXBuildFile; fileRef = D80ECB891BDEAA7D0055EF0A /* DBZxcvbn.m */; };
 		D80ECB9C1BDEAAD40055EF0A /* adjacency_graphs.json in Resources */ = {isa = PBXBuildFile; fileRef = D80ECB9A1BDEAABE0055EF0A /* adjacency_graphs.json */; };
 		D80ECB9D1BDEAAD40055EF0A /* frequency_lists.json in Resources */ = {isa = PBXBuildFile; fileRef = D80ECB9B1BDEAABE0055EF0A /* frequency_lists.json */; };
 /* End PBXBuildFile section */
@@ -600,21 +596,17 @@
 				B0D646011ED301640029DDA8 /* DBRankedDictionaryTests.m in Sources */,
 				B091121A1ED4893E007C643B /* DBL33tMatcherTests.m in Sources */,
 				B07201CE1EDDADBD00616D21 /* DBCompositeMatcherTests.m in Sources */,
-				D80ECB961BDEAA7D0055EF0A /* DBZxcvbn.m in Sources */,
 				B05996EB1ED30CEF000120B3 /* DBDictionaryMatcherTests.m in Sources */,
 				B0C8F8561ECDDCD90024C26B /* DBRepeatMatcherTests.m in Sources */,
 				B09112411ED5E937007C643B /* DBFakeMatcher.m in Sources */,
 				B091124B1EDC29DE007C643B /* DBSequenceMatcherTests.m in Sources */,
 				B07201C01EDD91A500616D21 /* DBUppercaseMatcherTests.m in Sources */,
-				D80ECB8D1BDEAA7D0055EF0A /* DBMatcher.m in Sources */,
 				B09112511EDC4753007C643B /* DBDateMatcherTests.m in Sources */,
 				B07201E81EDDCD0A00616D21 /* DBDelegatingMatcherTests.m in Sources */,
 				B0C8F8601ECEFAE60024C26B /* DBBruteForceMatcherTests.m in Sources */,
-				D80ECB931BDEAA7D0055EF0A /* DBScorer.m in Sources */,
 				D80ECB781BDEAA420055EF0A /* ZxcvbnTests.m in Sources */,
 				B07201EE1EDDD0A400616D21 /* DBPermutationMatcherTests.m in Sources */,
 				B05996F11ED330CF000120B3 /* DBAdjacentCharacterMapTests.m in Sources */,
-				D80ECB901BDEAA7D0055EF0A /* DBPasswordStrengthMeterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,13 +27,20 @@
     return self;
 }
 
-- (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
-    NSArray<DBMatch *> *matches = [self.cache objectForKey:password];
-    if (!matches) {
-        matches = [self.matcher matchesForPassword:password];
-        [self.cache setObject:matches forKey:password];
-    }
-    return matches;
+- (DBMatch *)matchForPassword:(NSString *)password {
+    DBMatch *match = [self.cache objectForKey:password];
+    if (!match) {
+        match = [self.matcher matchForPassword:password];
+        if (match) {
+            [self.cache setObject:match forKey:password];
+        } else {
+            [self.cache setObject:[NSNull null] forKey:password];
+        }
+        
+    } else if ([match isKindOfClass:NSNull.class]) {
+        return nil;
+    }   
+    return match;
 }
 
 @end

@@ -25,7 +25,7 @@
     return self;
 }
 
-- (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
+- (DBMatch *)matchForPassword:(NSString *)password {
     for (NSUInteger fragmentLength = 1; fragmentLength <= password.length / 2; fragmentLength++) {
         if (password.length % fragmentLength != 0) {
             continue;
@@ -47,11 +47,11 @@
             match.j = password.length - 1;
             match.repeatedToken = firstFragment;
             match.repeatCount = password.length / fragmentLength;
-            match.innerMatches = [self.matcher matchesForPassword:firstFragment];
-            return @[match];
+            match.innerMatch = [self.matcher matchForPassword:firstFragment];
+            return match;
         }
     }
-    return [self.matcher matchesForPassword:password];
+    return [self.matcher matchForPassword:password];
 }
 
 @end

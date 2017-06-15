@@ -25,12 +25,16 @@
     return self;
 }
 
-- (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
-    NSMutableArray<DBMatch *> *result = [[NSMutableArray alloc] init];
-    [self.matchers enumerateObjectsUsingBlock:^(id<DBMatching>  _Nonnull matcher, NSUInteger idx, BOOL * _Nonnull stop) {
-        [result addObjectsFromArray:[matcher matchesForPassword:password]];
-    }];
-    return result;
+- (DBMatch *)matchForPassword:(NSString *)password {
+    return nil;
 }
+
+//- (NSArray<DBMatch *> *)matchesForPassword:(NSString *)password {
+//    NSMutableArray<DBMatch *> *result = [[NSMutableArray alloc] init];
+//    [self.matchers enumerateObjectsUsingBlock:^(id<DBMatching>  _Nonnull matcher, NSUInteger idx, BOOL * _Nonnull stop) {
+//        [result addObjectsFromArray:[matcher matchesForPassword:password]];
+//    }];
+//    return result;
+//}
 
 @end

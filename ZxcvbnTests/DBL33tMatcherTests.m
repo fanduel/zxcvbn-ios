@@ -27,9 +27,9 @@
     stubMatcher.matchesForAnyPassword = @[expectedMatch];
     DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
 
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"password"];
+    DBMatch *result = [sut matchForPassword:@"password"];
 
-    XCTAssertEqualObjects(expectedMatch, result.firstObject);
+    XCTAssertEqualObjects(expectedMatch, result);
 }
 
 - (void)test_matchesForPassword_SingleL33tSubstitution_ProvidesPasswordWithoutL33tSubstitutionToMatcher {
@@ -41,9 +41,9 @@
     stubMatcher.matchesForPasswords = @{ @"password" : expectedInnerMatches };
     DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
 
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"p@ssword"];
+    DBMatch *result = [sut matchForPassword:@"p@ssword"];
 
-    DBL33tMatch *match = (DBL33tMatch *)result.firstObject;
+    DBL33tMatch *match = (DBL33tMatch *)result;
     XCTAssertEqualObjects(expectedInnerMatches, match.innerMatches);
 }
 
@@ -53,9 +53,9 @@
     stubMatcher.matchesForPasswords = @{ @"password" : @[innerMatch] };
     DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
 
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"p@ssw0rd"];
+    DBMatch *result = [sut matchForPassword:@"p@ssw0rd"];
 
-    DBL33tMatch *match = (DBL33tMatch *)result.firstObject;
+    DBL33tMatch *match = (DBL33tMatch *)result;
     XCTAssertEqual(2, match.substitutions.count);
 }
 
@@ -65,9 +65,9 @@
     stubMatcher.matchesForPasswords = @{ @"password" : @[innerMatch] };
     DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
 
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"passw0rd"];
+    DBMatch *result = [sut matchForPassword:@"passw0rd"];
 
-    DBL33tMatch *match = (DBL33tMatch *)result.firstObject;
+    DBL33tMatch *match = (DBL33tMatch *)result;
     DBL33tSubstitution *substitution = (DBL33tSubstitution *)match.substitutions.firstObject;
     XCTAssertEqualObjects(@"0", substitution.originalCharacrer);
 }
@@ -78,9 +78,9 @@
     stubMatcher.matchesForPasswords = @{ @"password" : @[innerMatch] };
     DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
 
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"passw0rd"];
+    DBMatch *result = [sut matchForPassword:@"passw0rd"];
 
-    DBL33tMatch *match = (DBL33tMatch *)result.firstObject;
+    DBL33tMatch *match = (DBL33tMatch *)result;
     DBL33tSubstitution *substitution = (DBL33tSubstitution *)match.substitutions.firstObject;
     XCTAssertEqualObjects(@"o", substitution.substitutedCharacrer);
 }
@@ -91,26 +91,26 @@
     stubMatcher.matchesForPasswords = @{ @"password" : @[innerMatch] };
     DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
 
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"passw0rd"];
+    DBMatch *result = [sut matchForPassword:@"passw0rd"];
 
-    DBL33tMatch *match = (DBL33tMatch *)result.firstObject;
+    DBL33tMatch *match = (DBL33tMatch *)result;
     DBL33tSubstitution *substitution = (DBL33tSubstitution *)match.substitutions.firstObject;
     XCTAssertEqual(5, substitution.characterIndex);
 }
 
-- (void)test_matchesForPassword_MultipleL33tSubstitutions_ReturnsMatchForEachPossiblePasswordWithoutL33tSubstitutions {
-    DBFakeMatcher *stubMatcher = [self createFakeMatcher];
-    stubMatcher.matchesForPasswords = @{
-                                        @"lol" : @[[self createMatchForPassword:@"lol"]],
-                                        @"lot" : @[[self createMatchForPassword:@"lot"]],
-                                        @"tot" : @[[self createMatchForPassword:@"tot"]]
-                                         };
-    DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
-
-    NSArray<DBMatch *> *result = [sut matchesForPassword:@"7o7"];
-
-    XCTAssertEqual(3, result.count);
-}
+//- (void)test_matchesForPassword_MultipleL33tSubstitutions_ReturnsMatchForEachPossiblePasswordWithoutL33tSubstitutions {
+//    DBFakeMatcher *stubMatcher = [self createFakeMatcher];
+//    stubMatcher.matchesForPasswords = @{
+//                                        @"lol" : @[[self createMatchForPassword:@"lol"]],
+//                                        @"lot" : @[[self createMatchForPassword:@"lot"]],
+//                                        @"tot" : @[[self createMatchForPassword:@"tot"]]
+//                                         };
+//    DBL33tMatcher *sut = [self createL33tMatcherWithMatcher:stubMatcher];
+//
+//    DBMatch *result = [sut matchForPassword:@"7o7"];
+//
+//    XCTAssertEqual(3, result.count);
+//}
 
 - (DBFakeMatcher *)createFakeMatcher {
     return [[DBFakeMatcher alloc] init];

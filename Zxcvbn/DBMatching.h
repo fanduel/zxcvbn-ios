@@ -12,6 +12,6 @@
 
 @protocol DBMatching
 
-- (nonnull NSArray<DBMatch *> *)matchesForPassword:(nonnull NSString *)password;
+- (nonnull DBMatch *)matchForPassword:(nonnull NSString *)password;
 
 @end
